@@ -6,7 +6,8 @@ export default {
 	schema: "./src/server/db/schema.ts",
 	driver: "pg",
 	dbCredentials: {
-		connectionString: env.DATABASE_URL,
+		connectionString:
+			env.NODE_ENV === "production" ? env.POSTGRES_URL : env.DATABASE_URL,
 	},
 	tablesFilter: ["responder_*"],
 } satisfies Config;

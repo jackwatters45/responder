@@ -6,6 +6,7 @@
 	"scripts": {
 		"build": "next build",
 		"db:push": "drizzle-kit push:pg",
+		"db:push:prod": "NODE_ENV=production drizzle-kit push:pg",
 		"db:studio": "drizzle-kit studio",
 		"dev": "next dev --turbo",
 		"lint": "next lint",
@@ -20,6 +21,7 @@
 		"@t3-oss/env-nextjs": "^0.10.1",
 		"@upstash/ratelimit": "^1.1.3",
 		"@upstash/redis": "^1.30.0",
+		"@vercel/postgres": "^0.8.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
 		"drizzle-orm": "^0.29.4",
