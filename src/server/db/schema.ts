@@ -16,17 +16,17 @@ import {
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = pgTableCreator((name) => `bruh_${name}`);
+export const createTable = pgTableCreator((name) => `responder_${name}`);
 
-export const posts = createTable(
-	"post",
-	{
-		id: serial("id").primaryKey(),
-		name: varchar("name", { length: 256 }),
-		createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
-		updatedAt: timestamp("updatedAt"),
-	},
-	(example) => ({
-		nameIndex: index("name_idx").on(example.name),
-	}),
-);
+// TODO: index
+export const users = createTable("user", {
+	id: serial("id").primaryKey(),
+	name: varchar("name", { length: 256 }),
+	email: varchar("email", { length: 256 }),
+
+	// TODO expand on this
+	company: varchar("company", { length: 256 }),
+
+	createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updatedAt: timestamp("updatedAt"),
+});
