@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { TopNav } from "./_components/top-nav";
+import { Toaster } from "./_components/ui/toaster";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -18,8 +19,10 @@ export const metadata = {
 
 export default function RootLayout({
 	children,
+	modal,
 }: {
 	children: React.ReactNode;
+	modal: React.ReactNode;
 }) {
 	return (
 		<html lang="en">
@@ -29,6 +32,9 @@ export default function RootLayout({
 						<TopNav />
 						<main className="w-full max-w-screen-xl flex-1 pt-14 2xl:max-w-screen-2xl">
 							{children}
+							{modal}
+							<div id="modal-route" />
+							<Toaster />
 						</main>
 						<Footer />
 					</div>
