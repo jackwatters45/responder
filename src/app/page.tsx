@@ -1,7 +1,5 @@
 // import { useRouter } from "next/navigation";
 import { Button } from "~/_components/ui/button";
-import { db } from "~/server/db";
-import { users } from "~/server/db/schema";
 import { addUser, getUsers } from "~/server/queries";
 
 export default async function HomePage() {

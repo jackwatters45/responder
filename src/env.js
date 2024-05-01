@@ -13,6 +13,7 @@ export const env = createEnv({
 			.default("development"),
 		CLERK_SECRET_KEY: z.string(),
 		GEMINI_API_KEY: z.string(),
+		SENTRY_AUTH_TOKEN: z.string(),
 	},
 
 	/**
@@ -22,6 +23,8 @@ export const env = createEnv({
 	 */
 	client: {
 		NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
+		NEXT_PUBLIC_POSTHOG_KEY: z.string(),
+		NEXT_PUBLIC_POSTHOG_HOST: z.string(),
 	},
 
 	/**
@@ -35,6 +38,9 @@ export const env = createEnv({
 			process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
 		CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
 		GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+		SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
+		NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+		NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
 	},
 	/**
 	 * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
