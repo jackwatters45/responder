@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import analyticsServerClient from "./analytics";
 import { db } from "./db";
 import { users } from "./db/schema";
+import { ratelimit } from "./ratelimit";
 
 export async function getUsers() {
 	const usersQuery = await db.query.users.findMany();
@@ -14,6 +15,9 @@ export async function getUsers() {
 export async function addUser() {
 	const user = auth();
 	if (!user.userId) throw new Error("User is not authenticated");
+
+	const { success } = await ratelimit.limit(user.userId);
+	if (!success) throw new Error("Rate limit exceeded");
 
 	await db.insert(users).values({
 		name: "User",
