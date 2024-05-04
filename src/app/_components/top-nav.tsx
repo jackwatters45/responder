@@ -15,7 +15,7 @@ export function TopNav() {
 				<NavigationMenuItem>
 					<NavigationMenuLink href="/" className="flex items-center gap-3">
 						<Image src="/favicon.ico" alt="Company Logo" width={20} height={20} />
-						<span>Team Send</span>
+						<span>Responder</span>
 					</NavigationMenuLink>
 				</NavigationMenuItem>
 				<div>
@@ -23,7 +23,9 @@ export function TopNav() {
 						<SignInButton />
 					</SignedOut>
 					<SignedIn>
-						<UserButton />
+						<div className="leading-[0px] ">
+							<UserButton />
+						</div>
 					</SignedIn>
 				</div>
 			</div>

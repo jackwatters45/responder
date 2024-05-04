@@ -6,13 +6,25 @@ import { db } from "./db";
 import { users } from "./db/schema";
 import { ratelimit } from "./ratelimit";
 
-export async function getUsers() {
-	const usersQuery = await db.query.users.findMany();
+export async function getUserBusiness(id: string) {
+	const user = auth();
+	if (!user.userId) throw new Error("User is not authenticated");
 
-	return usersQuery;
+	// if (id !== user.userId) throw new Error("Invalid user id");
+
+	const { success } = await ratelimit.limit(user.userId);
+	if (!success) throw new Error("Rate limit exceeded");
+
+	const userBusiness = false;
+
+	return userBusiness;
+
+	// TODO create schemas
+	// TODO query
+	// const userBusiness = await db
 }
 
-export async function addUser() {
+export async function addBusinessAccount() {
 	const user = auth();
 	if (!user.userId) throw new Error("User is not authenticated");
 

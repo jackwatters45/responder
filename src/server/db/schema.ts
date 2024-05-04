@@ -30,3 +30,9 @@ export const users = createTable("user", {
 	createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updatedAt: timestamp("updatedAt"),
 });
+
+export const config = createTable("config", {
+	id: serial("id").primaryKey(),
+	key: varchar("key", { length: 256 }),
+	value: varchar("value", { length: 256 }),
+});

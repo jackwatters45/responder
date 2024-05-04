@@ -12,7 +12,9 @@ export const env = createEnv({
 			.enum(["development", "test", "production"])
 			.default("development"),
 		CLERK_SECRET_KEY: z.string(),
-		GEMINI_API_KEY: z.string(),
+		OPENAI_API_KEY: z.string(),
+		OPENAI_ORGANIZATION_ID: z.string(),
+		OPENAI_PROJECT_ID: z.string(),
 		SENTRY_AUTH_TOKEN: z.string(),
 		UPSTASH_REDIS_REST_URL: z.string(),
 		UPSTASH_REDIS_REST_TOKEN: z.string(),
@@ -24,6 +26,9 @@ export const env = createEnv({
 		POSTGRES_URL_NON_POOLING: z.string(),
 		POSTGRES_URL_NO_SSL: z.string(),
 		POSTGRES_USER: z.string(),
+		STRIPE_SECRET_KEY: z.string(),
+		GOOGLE_ID: z.string(),
+		GOOGLE_SECRET: z.string(),
 	},
 
 	/**
@@ -32,9 +37,11 @@ export const env = createEnv({
 	 * `NEXT_PUBLIC_`.
 	 */
 	client: {
+		NEXT_PUBLIC_BASE_URL: z.string(),
 		NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
 		NEXT_PUBLIC_POSTHOG_KEY: z.string(),
 		NEXT_PUBLIC_POSTHOG_HOST: z.string(),
+		NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string(),
 	},
 
 	/**
@@ -43,11 +50,14 @@ export const env = createEnv({
 	 */
 	runtimeEnv: {
 		DATABASE_URL: process.env.DATABASE_URL,
+		NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
 		NODE_ENV: process.env.NODE_ENV,
 		NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
 			process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
 		CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
-		GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+		OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+		OPENAI_ORGANIZATION_ID: process.env.OPENAI_ORGANIZATION_ID,
+		OPENAI_PROJECT_ID: process.env.OPENAI_PROJECT_ID,
 		SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
 		NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
 		NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
@@ -61,6 +71,11 @@ export const env = createEnv({
 		POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING,
 		POSTGRES_URL_NO_SSL: process.env.POSTGRES_URL_NO_SSL,
 		POSTGRES_USER: process.env.POSTGRES_USER,
+		STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+		NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
+			process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+		GOOGLE_ID: process.env.GOOGLE_ID,
+		GOOGLE_SECRET: process.env.GOOGLE_SECRET,
 	},
 	/**
 	 * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
