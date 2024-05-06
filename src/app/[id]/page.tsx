@@ -1,15 +1,8 @@
-// export default function PhotoModal) {
-// 	return (
-// 		<div className="flex h-full min-h-0 w-full min-w-0 overflow-y-hidden">
-// 			<a href={`${id + 1}`}> Next </a>
-// 		</div>
-// 	);
-// }
-
-import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import { Button } from "~/_components/ui/button";
+
 import { addBusinessAccount, getUserBusiness } from "~/server/queries";
+
+import { Button } from "~/_components/ui/button";
 
 export default async function Dashboard({
 	params: { id },

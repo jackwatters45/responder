@@ -60,6 +60,8 @@ export interface ButtonLinkProps
 	className?: string;
 	children?: React.ReactNode;
 	asChild?: boolean;
+	onMouseLeave?: React.MouseEventHandler<HTMLAnchorElement>;
+	onTouchEnd?: React.TouchEventHandler<HTMLAnchorElement>;
 }
 
 const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(

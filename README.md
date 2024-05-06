@@ -2,9 +2,11 @@
 
 ## todo
 
-- bruh this damn line kms
+- c
+- onboarding
 
-- middleware to check if logged in user is associated with the url account
+- add dashboard button to nav
+
 - flow
   - connect google my business
     - add relevant fields to db
@@ -35,6 +37,12 @@
 - dashboard
 - style last
 
+## later
+
+- muted color no like
+- evaluate security of routing...
+- style user profile dropdown
+
 ## look more into
 
 - sentry
@@ -44,3 +52,7 @@
 - lol react taint? did not follow
 
 - sst for prod?
+
+## Notes
+
+- weird color block only happens with empty space so just ignore.

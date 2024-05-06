@@ -30,8 +30,7 @@ export default function RootLayout({
 				<ClerkProvider>
 					<div className="font-sans flex min-h-screen flex-col items-center">
 						<TopNav />
-						<main className="w-full flex-1 pt-14 flex flex-col">
-							{/* <main className="w-full max-w-screen-xl flex-1 pt-14 2xl:max-w-screen-2xl flex flex-col"> */}
+						<main className="w-full flex-1 pt-14 flex flex-col max-w-screen-xl ">
 							{children}
 							{modal}
 							<div id="modal-route" />

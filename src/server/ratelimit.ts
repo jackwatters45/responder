@@ -5,7 +5,7 @@ import { Redis } from "@upstash/redis";
 export const ratelimit = new Ratelimit({
 	redis: Redis.fromEnv(),
 	// TODO change to something more conservative for prod
-	limiter: Ratelimit.slidingWindow(10, "10 s"),
+	limiter: Ratelimit.slidingWindow(20, "10 s"),
 	analytics: true,
 	/**
 	 * Optional prefix for the keys used in redis. This is useful if you want to share a redis
