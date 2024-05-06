@@ -1,5 +1,5 @@
 import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import NotFound from "~/_components/errors/not-found";
 import Sidebar from "../_components/sidebar-nav";
 
@@ -10,14 +10,11 @@ export default async function Layout({
 	children: React.ReactNode;
 	params: { id: string };
 }) {
-	const user = await currentUser();
+	const { sessionClaims } = auth();
 
-	if (user?.username && user.username !== id) {
+	if (sessionClaims && sessionClaims.username !== id) {
 		return (
-			<NotFound
-				email={user.emailAddresses?.[0]?.emailAddress}
-				username={user.username}
-			/>
+			<NotFound email={sessionClaims.email} username={sessionClaims.username} />
 		);
 	}
 

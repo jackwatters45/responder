@@ -1,11 +1,13 @@
 import { RedirectToSignIn } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 export default async function HomePage() {
-	const user = await currentUser();
+	const { sessionClaims } = auth();
 
-	if (user?.username) redirect(`/${user.username}`);
+	const username = sessionClaims?.username;
+
+	if (username) redirect(`/${username}`);
 
 	return <RedirectToSignIn />;
 }
