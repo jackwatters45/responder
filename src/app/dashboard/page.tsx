@@ -1,4 +1,4 @@
-import { RedirectToSignIn, SignedOut } from "@clerk/nextjs";
+import { RedirectToSignIn } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -7,9 +7,5 @@ export default async function HomePage() {
 
 	if (user?.username) redirect(`/${user.username}`);
 
-	return (
-		<SignedOut>
-			<RedirectToSignIn />
-		</SignedOut>
-	);
+	return <RedirectToSignIn />;
 }
