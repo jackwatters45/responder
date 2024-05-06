@@ -17,21 +17,39 @@ import {
  */
 export const createTable = pgTableCreator((name) => `responder_${name}`);
 
-// TODO: index
-export const users = createTable("user", {
+export const accounts = createTable("google-mybusiness-account", {
 	id: serial("id").primaryKey(),
-	name: varchar("name", { length: 256 }),
-	email: varchar("email", { length: 256 }),
+	userId: varchar("userId", { length: 256 }).notNull(),
 
-	// TODO expand on this
-	company: varchar("company", { length: 256 }),
+	// add relevant account info
+	//
 
 	createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updatedAt: timestamp("updatedAt"),
 });
 
-export const config = createTable("config", {
+export const locations = createTable("google-mybusiness-location", {
 	id: serial("id").primaryKey(),
-	key: varchar("key", { length: 256 }),
-	value: varchar("value", { length: 256 }),
+	userId: varchar("userId", { length: 256 }).notNull(),
+
+	// add relevant google business info
+	//
+
+	createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updatedAt: timestamp("updatedAt"),
 });
+
+export const configs = createTable("config", {
+	id: serial("id").primaryKey(),
+	userId: varchar("userId", { length: 256 }).notNull(),
+
+	// ie - prompt
+	// ie - filter (negative, positive) (actual cutoff)
+	// delay range
+
+	createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+	updatedAt: timestamp("updatedAt"),
+});
+
+// Clerk Meta Data
+// isOnboarded: boolean("isOnboarded").default(false).notNull(),

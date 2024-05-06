@@ -26,11 +26,19 @@ export default async function Layout({
 						items={[
 							{
 								href: `/${id}`,
-								title: "Dashboard",
+								title: "Home",
 							},
 							{
 								href: `/${id}/settings`,
 								title: "Settings",
+							},
+							{
+								href: `/${id}/onboarding`,
+								title: "Onboarding",
+							},
+							{
+								href: `/${id}/billing`,
+								title: "Plan & Billing",
 							},
 						]}
 					/>
