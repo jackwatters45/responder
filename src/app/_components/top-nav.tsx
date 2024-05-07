@@ -43,9 +43,7 @@ export function TopNav() {
 					</SignedIn>
 				</NavigationMenuItem>
 				<div>
-					<SignedOut>
-						<SignInButton />
-					</SignedOut>
+					<SignedOut>{/* <SignInButton /> */}</SignedOut>
 					<SignedIn>
 						<div className="flex items-center gap-6 text-sm font-normal">
 							<div className="flex items-center gap-4">

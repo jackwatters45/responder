@@ -1,8 +1,7 @@
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
+import { Button } from "~/app/_components/ui/button";
 import { addBusinessAccount, getUserBusiness } from "~/server/queries";
-
-import { Button } from "~/_components/ui/button";
 
 export default async function Dashboard({
 	params: { id },
