@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Button } from "../../../_components/ui/button";
+import { Button } from "../ui/button";
 
 export default function ErrorComponent() {
 	const router = useRouter();

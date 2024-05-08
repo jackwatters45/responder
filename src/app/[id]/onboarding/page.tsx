@@ -1,6 +1,7 @@
-import { auth } from "@clerk/nextjs/server";
+"use client";
+
 import { CheckIcon } from "@radix-ui/react-icons";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { cn } from "~/lib/utils";
 
@@ -16,9 +17,9 @@ import {
 import { Label } from "~/app/_components/ui/label";
 import { Textarea } from "~/app/_components/ui/textarea";
 
-import { revalidatePath } from "next/cache";
+import { useUser } from "@clerk/nextjs";
 import { useFormState } from "react-dom";
-import { z } from "zod";
+import { LoadingPage } from "~/app/_components/ui/loading";
 import {
 	Select,
 	SelectContent,
@@ -27,13 +28,8 @@ import {
 	SelectValue,
 } from "~/app/_components/ui/select";
 import { Switch } from "~/app/_components/ui/switch";
+import { createConfig } from "./actions";
 import { SubmitButton } from "./submit-button";
-
-const schema = z.object({
-	email: z.string({
-		invalid_type_error: "Invalid Email",
-	}),
-});
 
 const initialState = {
 	message: "",
@@ -60,59 +56,25 @@ const initialState = {
 // TODO read dis: <https://nextjs.org/docs/app/building-your-application/data-fetching/patterns>
 // TODO dis eventually: <https://ui.shadcn.com/docs/dark-mode/next>
 // content will also defintely need to exist in the dashboard -> components
-export default async function Dashboard({
+export default function Dashboard({
 	params: { id },
 }: {
 	params: { id: string };
 }) {
-	const isOnboarded = auth().sessionClaims?.publicMetaData?.isOnboarded ?? false;
-	if (isOnboarded) redirect(`/${id}`);
+	const router = useRouter();
+	const { user, isLoaded } = useUser();
+	if (isLoaded && user?.publicMetadata?.isOnboarded) router.push(`/${id}`);
 
 	// form shite
 	const [state, formAction] = useFormState(createConfig, initialState);
 
 	// would move to actions file
-	async function createConfig(prevState: unknown, formData: FormData) {
-		"use server";
-
-		auth().protect(); // TODO check if correct user?
-
-		try {
-			// validate using zod backend and justt use native html frontend
-			const validatedFields = schema.safeParse({
-				email: formData.get("email"),
-			});
-
-			// Return early if the form data is invalid
-			if (!validatedFields.success) {
-				return {
-					errors: validatedFields.error.flatten().fieldErrors,
-				};
-			}
-
-			const rawFormData = Object.fromEntries(formData);
-
-			// mutate data
-			// revalidate cache
-
-			return {
-				message: "Please enter a valid email",
-			};
-		} catch (e) {
-			console.error(e);
-		}
-
-		// revalidate nextjs cache for path
-		revalidatePath(`/${id}/onboarding`);
-		// or jst for specific data
-		// revalidateTag('posts')
-
-		redirect(`/${id}`);
-	}
 
 	// how to add additional arguments
 	// const updateUserWithId = updateUser.bind(null, userId)
 	// export async function updateUser(userId, formData) {
+
+	if (!isLoaded) return <LoadingPage />;
 
 	return (
 		<>
