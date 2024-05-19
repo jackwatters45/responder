@@ -27,6 +27,7 @@ import {
 } from "~/app/_components/ui/select";
 import { Separator } from "~/app/_components/ui/separator";
 import { Switch } from "~/app/_components/ui/switch";
+import PricingCard from "../../_components/ui/pricing-card";
 import { createConfig } from "./actions";
 import { SubmitButton } from "./submit-button";
 
@@ -339,28 +340,6 @@ function ResponsePrompts() {
 	);
 }
 
-const pricing = [
-	{
-		title: "Basic",
-		description: "$9/month",
-		features: [
-			"Single Business",
-			"Default negative and positive review filters",
-			"Automated review responses",
-		],
-	},
-	{
-		title: "Premium",
-		description: "$29/month",
-		features: [
-			"Multiple Businesses",
-			"Custom review filters",
-			"Automated and manual review responses",
-			"Detailed analytics and reporting",
-		],
-	},
-];
-
 function ChoosePlan() {
 	return (
 		<div>
@@ -371,51 +350,30 @@ function ChoosePlan() {
 						Upgrade to unlock premium features and manage multiple businesses.
 					</div>
 				</div>
-
 				<div className="grid grid-cols-2 gap-4">
-					<Card className="flex flex-col">
-						<CardHeader className="space-y-4">
-							<CardTitle>Free</CardTitle>
-							<CardDescription className="space-y-4 text-muted-foreground">
-								For small businesses looking to manage a single location using only
-								basic features.
-							</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<ul className="ml-6 list-disc [&>li]:mt-2 text-sm ">
-								<li>One business</li>
-								<li>Positive and negative filters</li>
-								<li>Automated responses</li>
-							</ul>
-						</CardContent>
-						<CardFooter className="flex-1 items-end">
-							<Button variant={"secondary"} className="w-full ">
-								Selected
-							</Button>
-						</CardFooter>
-					</Card>
-
-					<Card className="flex flex-col">
-						<CardHeader className="space-y-4">
-							<CardTitle>Premium</CardTitle>
-							<CardDescription className="space-y-4 text-muted-foreground">
-								For growing businesses looking to manage multiple locations and unlock
-								premium features.
-							</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<ul className="ml-6 list-disc [&>li]:mt-2 text-sm ">
-								<li>Unlimited businesses</li>
-								<li>Unlimited custom filters</li>
-								<li>Automated and manual responses</li>
-							</ul>
-						</CardContent>
-						<CardFooter className="flex-1 items-end">
-							<Button variant={"outline"} className="w-full">
-								Select
-							</Button>
-						</CardFooter>
-					</Card>
+					<PricingCard
+						title="Free"
+						description="For small businesses looking to manage a single location using only basic features."
+						price={{ monthly: 0, yearly: 0 }}
+						bulletPoints={[
+							"Single business",
+							"Default negative and positive review filters",
+							"Automated review responses",
+						]}
+						isSelected={true}
+					/>
+					<PricingCard
+						title="Premium"
+						description="For growing businesses looking to manage multiple locations and unlock premium features."
+						price={{ monthly: 5, yearly: 50 }}
+						bulletPoints={[
+							"Multiple Businesses",
+							"Custom review filters",
+							"Automated and manual review responses",
+							// "Detailed analytics and reporting",
+						]}
+						isSelected={false}
+					/>
 				</div>
 			</div>
 		</div>
