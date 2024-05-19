@@ -15,7 +15,7 @@ const inter = Inter({
 
 export const metadata = {
 	title: "Responder",
-	description: "TODO - get it respond-er or responder",
+	description: "Optimize Google Business replies using OpenAI (Chat-GPT)",
 	icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
