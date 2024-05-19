@@ -33,7 +33,7 @@ export default function PricingCard({
 }: PricingCardProps) {
 	return (
 		<Card
-			className="group data-[selected=true]:border-2 data-[selected=true]:border-muted-foreground relative"
+			className="data-[selected=true]:border-2 data-[selected=true]:border-muted-foreground"
 			data-selected={isSelected}
 		>
 			<CardHeader className="space-y-4">

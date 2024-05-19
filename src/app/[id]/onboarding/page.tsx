@@ -1,9 +1,42 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
+import type { BusinessPreview } from "types/business-preview";
+import ConnectGoogle from "./connect-google";
 import DashboardForm from "./form";
 
-export default function Dashboard({
+async function getUserBusinesses(): Promise<BusinessPreview[]> {
+	return [
+		{
+			id: 1,
+			name: "Business 1",
+			type: "Google My Business",
+			address: {
+				street: "123 First St",
+				city: "Springfield",
+				state: "IL",
+				zip: "62701",
+			},
+			rating: 4.5,
+			reviewCount: 100,
+		},
+		{
+			id: 2,
+			name: "Business 2",
+			type: "Google My Business 2",
+			address: {
+				street: "321 Second St",
+				city: "Springfield",
+				state: "IL",
+				zip: "62701",
+			},
+			rating: 4.2,
+			reviewCount: 55,
+		},
+	];
+}
+
+export default async function Dashboard({
 	params: { id },
 }: {
 	params: { id: string };
@@ -12,5 +45,9 @@ export default function Dashboard({
 
 	if (isOnboarded) return redirect(`/${id}`);
 
-	return <DashboardForm />;
+	const businesses = await getUserBusinesses();
+
+	if (businesses.length === 0) return <ConnectGoogle />;
+
+	return <DashboardForm businesses={businesses} />;
 }

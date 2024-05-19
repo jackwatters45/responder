@@ -14,6 +14,7 @@ import { Label } from "~/app/_components/ui/label";
 import { Textarea } from "~/app/_components/ui/textarea";
 
 import { useFormState } from "react-dom";
+import type { BusinessPreview } from "types/business-preview";
 import { Form } from "~/app/_components/ui/form";
 import { Input } from "~/app/_components/ui/input";
 import {
@@ -29,6 +30,7 @@ import { Separator } from "~/app/_components/ui/separator";
 import { Switch } from "~/app/_components/ui/switch";
 import PricingCard from "../../_components/ui/pricing-card";
 import { createConfig } from "./actions";
+import BusinessPreviewCard from "./business-preview-card";
 import { SubmitButton } from "./submit-button";
 
 const initialState = {
@@ -53,8 +55,7 @@ const initialState = {
 // }
 
 // TODO
-// pricing
-// style
+// filters card
 // specific logic (rendering, values, conditional shit, etc)
 // default negative and positive review filters
 // default prompt
@@ -62,17 +63,19 @@ const initialState = {
 // toggle mode get make work
 // read dis: <https://nextjs.org/docs/app/building-your-application/data-fetching/patterns>
 // content will also defintely need to exist in the dashboard -> components
-export default function DashboardForm() {
-	// form shite
+
+// would move to actions file
+
+// how to add additional arguments
+// const updateUserWithId = updateUser.bind(null, userId)
+// export async function updateUser(userId, formData) {
+
+interface OnboardingFormProps {
+	businesses: BusinessPreview[];
+}
+
+export default function DashboardForm({ businesses }: OnboardingFormProps) {
 	const [state, formAction] = useFormState(createConfig, initialState);
-
-	// const [isBusinessConnected, setIsBusinessConnected] = React.useState(false);
-
-	// would move to actions file
-
-	// how to add additional arguments
-	// const updateUserWithId = updateUser.bind(null, userId)
-	// export async function updateUser(userId, formData) {
 
 	return (
 		<div className="container mx-auto px-4 md:px-6">
@@ -86,9 +89,8 @@ export default function DashboardForm() {
 							Let's get you set up to start managing your reviews.
 						</p>
 					</div>
-					{/* <ConnectGoogle /> */}
-					<form action="" className="space-y-8">
-						<ChooseBusinesses />
+					<form action={formAction} className="space-y-8">
+						<ChooseBusinesses businesses={businesses} />
 						<ChoosePlan />
 						<ResponsePrompts />
 						<div className="w-full flex items-center justify-between">
@@ -110,76 +112,7 @@ export default function DashboardForm() {
 	);
 }
 
-function ConnectGoogle() {
-	return (
-		<Card>
-			<CardHeader className="space-y-4">
-				<CardTitle>Connect Google My Business</CardTitle>
-				<CardDescription className="space-y-4">
-					<div className="text-muted-foreground">
-						Link your Google My Business account to start managing your reviews.
-					</div>
-					<div className="text-muted-foreground">
-						You can manage one business on the free plan. Upgrade to manage multiple
-						businesses and unlock premium features.
-					</div>
-				</CardDescription>
-			</CardHeader>
-			<CardContent>
-				<Button
-					size="lg"
-					variant="outline"
-					className="w-full flex items-center gap-2"
-				>
-					Connect Google My Business
-				</Button>
-			</CardContent>
-			<CardFooter className="text-muted-foreground text-sm">
-				You'll be redirected to Google to authorize the connection.
-			</CardFooter>
-		</Card>
-	);
-}
-
-interface BusinessPreview {
-	id: number;
-	name: string;
-	type: string;
-	address: { street: string; city: string; state: string; zip: string };
-	rating: number;
-	reviewCount: number;
-}
-
-const businesses: BusinessPreview[] = [
-	{
-		id: 1,
-		name: "Business 1",
-		type: "Google My Business",
-		address: {
-			street: "123 First St",
-			city: "Springfield",
-			state: "IL",
-			zip: "62701",
-		},
-		rating: 4.5,
-		reviewCount: 100,
-	},
-	{
-		id: 2,
-		name: "Business 2",
-		type: "Google My Business 2",
-		address: {
-			street: "321 Second St",
-			city: "Springfield",
-			state: "IL",
-			zip: "62701",
-		},
-		rating: 4.2,
-		reviewCount: 55,
-	},
-];
-
-function ChooseBusinesses() {
+function ChooseBusinesses({ businesses }: { businesses: BusinessPreview[] }) {
 	return (
 		<div className="space-y-8 pt-8">
 			<div>
@@ -193,38 +126,74 @@ function ChooseBusinesses() {
 			</div>
 			<div className="grid grid-cols-2 gap-4">
 				{businesses.map((business) => (
-					<BusinessPreview key={business.id} {...business} />
+					<BusinessPreviewCard key={business.id} {...business} selected={false} />
 				))}
 			</div>
 		</div>
 	);
 }
 
-function BusinessPreview(props: BusinessPreview) {
+function ChoosePlan() {
 	return (
-		<Card className="w-full">
-			<CardHeader className="space-y-4">
-				<CardTitle>{props.name}</CardTitle>
-				<CardDescription className="space-y-4">
-					<div className="text-muted-foreground">
-						{props.type} in {props.address.city}, {props.address.state}
+		<div>
+			<div className="space-y-8 pt-8">
+				<div className="space-y-2">
+					<div className="text-2xl font-bold">Choose Your Plan</div>
+					<div className=" text-muted-foreground ">
+						Upgrade to unlock premium features and manage multiple businesses.
 					</div>
-				</CardDescription>
-			</CardHeader>
-			<CardContent>
-				<div className="flex items-center gap-2">
-					<div className="text-xl font-bold">{props.rating}</div>
-					<div className="text-muted-foreground">({props.reviewCount} reviews)</div>
 				</div>
-			</CardContent>
-			<CardFooter className="text-muted-foreground text-sm flex items-center justify-between">
-				<div>Manage Business</div>
-				<Switch />
-			</CardFooter>
-		</Card>
+				<div className="grid grid-cols-2 gap-4">
+					<PricingCard
+						title="Free"
+						description="For small businesses looking to manage a single location using only basic features."
+						price={{ monthly: 0, yearly: 0 }}
+						bulletPoints={[
+							"Single business",
+							"Default negative and positive review filters",
+							"Automated review responses",
+						]}
+						isSelected={true}
+					/>
+					<PricingCard
+						title="Premium"
+						description="For growing businesses looking to manage multiple locations and unlock premium features."
+						price={{ monthly: 5, yearly: 50 }}
+						bulletPoints={[
+							"Multiple Businesses",
+							"Custom review filters",
+							"Automated and manual review responses",
+							// "Detailed analytics and reporting",
+						]}
+						isSelected={false}
+					/>
+				</div>
+			</div>
+		</div>
 	);
 }
 
+function ResponsePrompts() {
+	return (
+		<div>
+			<div className="space-y-8 pt-8">
+				<div className="space-y-2">
+					<div className="text-2xl font-bold">Add Filters</div>
+					<div className=" text-muted-foreground ">
+						Configure your filters based on review rating
+					</div>
+				</div>
+				<div className="grid gap-6">
+					{[1, 2].map((id) => (
+						<ResponseSetting key={id} id={id.toString()} />
+					))}
+				</div>
+			</div>
+		</div>
+	);
+}
+
+// TODO
 function ResponseSetting({ id }: { id: string }) {
 	return (
 		<Card>
@@ -319,63 +288,5 @@ function ResponseSetting({ id }: { id: string }) {
 				</div>
 			</CardContent>
 		</Card>
-	);
-}
-
-function ResponsePrompts() {
-	return (
-		<div>
-			<div className="space-y-8 pt-8">
-				<div className="space-y-2">
-					<div className="text-2xl font-bold">Add Filters</div>
-					<div className=" text-muted-foreground ">
-						Configure your filters based on review rating
-					</div>
-				</div>
-				<div className="grid gap-6">
-					<ResponseSetting id="id" />
-				</div>
-			</div>
-		</div>
-	);
-}
-
-function ChoosePlan() {
-	return (
-		<div>
-			<div className="space-y-8 pt-8">
-				<div className="space-y-2">
-					<div className="text-2xl font-bold">Choose Your Plan</div>
-					<div className=" text-muted-foreground ">
-						Upgrade to unlock premium features and manage multiple businesses.
-					</div>
-				</div>
-				<div className="grid grid-cols-2 gap-4">
-					<PricingCard
-						title="Free"
-						description="For small businesses looking to manage a single location using only basic features."
-						price={{ monthly: 0, yearly: 0 }}
-						bulletPoints={[
-							"Single business",
-							"Default negative and positive review filters",
-							"Automated review responses",
-						]}
-						isSelected={true}
-					/>
-					<PricingCard
-						title="Premium"
-						description="For growing businesses looking to manage multiple locations and unlock premium features."
-						price={{ monthly: 5, yearly: 50 }}
-						bulletPoints={[
-							"Multiple Businesses",
-							"Custom review filters",
-							"Automated and manual review responses",
-							// "Detailed analytics and reporting",
-						]}
-						isSelected={false}
-					/>
-				</div>
-			</div>
-		</div>
 	);
 }
