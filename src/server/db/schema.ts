@@ -50,6 +50,3 @@ export const configs = createTable("config", {
 	createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
 	updatedAt: timestamp("updatedAt"),
 });
-
-// Clerk Meta Data
-// isOnboarded: boolean("isOnboarded").default(false).notNull(),

@@ -12,7 +12,7 @@ const schema = z.object({
 });
 
 export async function createConfig(prevState: unknown, formData: FormData) {
-	auth().protect(); // TODO check if correct user?
+	// auth().protect(); // TODO check if correct user?
 
 	try {
 		// validate using zod backend and justt use native html frontend
