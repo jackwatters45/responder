@@ -1,7 +1,7 @@
 import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import NotFound from "~/app/_components/errors/not-found";
-import Sidebar from "../_components/sidebar-nav";
+import Sidebar from "../_components/nav/sidebar-nav";
 
 export default async function Layout({
 	children,

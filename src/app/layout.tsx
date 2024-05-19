@@ -3,7 +3,9 @@ import "~/styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import { TopNav } from "./_components/top-nav";
+
+import { TopNav } from "./_components/nav/top-nav";
+import { ThemeProvider } from "./_components/theme-provider";
 import { Toaster } from "./_components/ui/toaster";
 
 const inter = Inter({
@@ -28,16 +30,23 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`font-sans ${inter.variable} dark`}>
 				<ClerkProvider>
-					<div className="font-sans flex min-h-screen flex-col items-center">
-						<TopNav />
-						<main className="w-full flex-1 pt-14 flex flex-col max-w-screen-xl ">
-							{children}
-							{modal}
-							<div id="modal-route" />
-							<Toaster />
-						</main>
-						<Footer />
-					</div>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<div className="font-sans flex min-h-screen flex-col items-center">
+							<TopNav />
+							<main className="w-full flex-1 pt-14 flex flex-col">
+								{children}
+								{modal}
+								<div id="modal-route" />
+								<Toaster />
+							</main>
+							<Footer />
+						</div>
+					</ThemeProvider>
 				</ClerkProvider>
 			</body>
 		</html>
