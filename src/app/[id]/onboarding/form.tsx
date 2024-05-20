@@ -33,12 +33,12 @@ const initialState = {
 // }
 
 // TODO
-// filters card
-// specific logic (rendering, values, conditional shit, etc)
-// default negative and positive review filters
-// default prompt
 // one business should fit whole row (grid -> fit full row when only one)
 // toggle mode get make work
+
+// filter show logic
+// default negative and positive review filters
+// specific logic (rendering, values, conditional shit, etc)
 // read dis: <https://nextjs.org/docs/app/building-your-application/data-fetching/patterns>
 // content will also defintely need to exist in the dashboard -> components
 
@@ -90,6 +90,10 @@ export default function DashboardForm({ businesses }: OnboardingFormProps) {
 	);
 }
 
+export function getIsLastSingle(index: number, businessesLength: number) {
+	return index === businessesLength - 1 && businessesLength % 2 !== 0;
+}
+
 function ChooseBusinesses({ businesses }: { businesses: BusinessPreview[] }) {
 	return (
 		<div className="space-y-8 pt-8">
@@ -103,8 +107,13 @@ function ChooseBusinesses({ businesses }: { businesses: BusinessPreview[] }) {
 				</p>
 			</div>
 			<div className="grid grid-cols-2 gap-4">
-				{businesses.map((business) => (
-					<BusinessPreviewCard key={business.id} {...business} selected={false} />
+				{businesses.map((business, i) => (
+					<BusinessPreviewCard
+						key={business.id}
+						{...business}
+						selected={false}
+						isLastSingle={getIsLastSingle(i, businesses.length)}
+					/>
 				))}
 			</div>
 		</div>

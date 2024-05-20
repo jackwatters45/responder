@@ -33,6 +33,19 @@ async function getUserBusinesses(): Promise<BusinessPreview[]> {
 			rating: 4.2,
 			reviewCount: 55,
 		},
+		{
+			id: 3,
+			name: "Business 3",
+			type: "Google My Business 3",
+			address: {
+				street: "231 Third St",
+				city: "Springfield",
+				state: "IL",
+				zip: "62701",
+			},
+			rating: 3.8,
+			reviewCount: 62,
+		},
 	];
 }
 
