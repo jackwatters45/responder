@@ -1,36 +1,14 @@
 "use client";
 
 import { Button } from "~/app/_components/ui/button";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "~/app/_components/ui/card";
-
-import { Label } from "~/app/_components/ui/label";
-import { Textarea } from "~/app/_components/ui/textarea";
 
 import { useFormState } from "react-dom";
 import type { BusinessPreview } from "types/business-preview";
-import { Form } from "~/app/_components/ui/form";
-import { Input } from "~/app/_components/ui/input";
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectLabel,
-	SelectTrigger,
-	SelectValue,
-} from "~/app/_components/ui/select";
-import { Separator } from "~/app/_components/ui/separator";
-import { Switch } from "~/app/_components/ui/switch";
+
 import PricingCard from "../../_components/ui/pricing-card";
 import { createConfig } from "./actions";
 import BusinessPreviewCard from "./business-preview-card";
+import ResponseSettingCard from "./response-setting-card";
 import { SubmitButton } from "./submit-button";
 
 const initialState = {
@@ -185,108 +163,10 @@ function ResponsePrompts() {
 				</div>
 				<div className="grid gap-6">
 					{[1, 2].map((id) => (
-						<ResponseSetting key={id} id={id.toString()} />
+						<ResponseSettingCard key={id} id={id.toString()} />
 					))}
 				</div>
 			</div>
 		</div>
-	);
-}
-
-// TODO
-function ResponseSetting({ id }: { id: string }) {
-	return (
-		<Card>
-			<CardHeader>
-				<CardTitle className="flex items-center justify-between">
-					<span>Review {"`some-key`"}</span>
-					edit icon
-				</CardTitle>
-				<div className="pt-2" />
-				<Separator />
-			</CardHeader>
-			<CardContent className="space-y-8">
-				<div className="space-y-4">
-					<Label htmlFor={`${id}-filter`}>Filter</Label>
-					<div className="flex items-center gap-2">
-						<span>Review is </span>
-						<Select>
-							<SelectTrigger className="w-[180px]">
-								<SelectValue placeholder="Select comparison" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectGroup>
-									<SelectLabel>Comparison</SelectLabel>
-									<SelectItem value="==">equal to</SelectItem>
-									<SelectItem value="<=">less than or equal to</SelectItem>
-									<SelectItem value=">=">greater than or equal to</SelectItem>
-									<SelectItem value="<">less than</SelectItem>
-									<SelectItem value=">">greater than</SelectItem>
-								</SelectGroup>
-							</SelectContent>
-						</Select>
-						<Select>
-							<SelectTrigger className="w-[180px]" id="negative-filter">
-								<SelectValue placeholder="Select rating" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectGroup>
-									<SelectLabel>Ratings</SelectLabel>
-									<SelectItem value="1">1 - Very Bad</SelectItem>
-									<SelectItem value="2">2 - Bad</SelectItem>
-									<SelectItem value="3">3 - Okay</SelectItem>
-									<SelectItem value="4">4 - Good</SelectItem>
-									<SelectItem value="5">5 - Very Good</SelectItem>
-								</SelectGroup>
-							</SelectContent>
-						</Select>
-						<span>stars</span>
-					</div>
-				</div>
-				<div className="space-y-2">
-					<Label htmlFor={`${id}-prompt`}>Prompt</Label>
-					<Textarea
-						id={`${id}-prompt`}
-						placeholder="Enter your GPT prompt template"
-					/>
-				</div>
-
-				<div className="flex items-center gap-2">
-					<Switch id={`${id}-manual-response`} />
-					<Label htmlFor={`${id}-manual-response`}>
-						Send email instead of auto-generating replies for negative reviews
-					</Label>
-				</div>
-
-				<div className="space-y-2">
-					<Label htmlFor="response-time">Response Time</Label>
-					<div className="flex items-center gap-2">
-						<Select defaultValue="24">
-							<SelectTrigger className="w-full">
-								<SelectValue placeholder="Select response range" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="12">Exactly</SelectItem>
-								<SelectItem value="24">Between</SelectItem>
-							</SelectContent>
-						</Select>
-
-						<Input />
-						<span>and</span>
-						<Input />
-
-						<Select defaultValue="minutes">
-							<SelectTrigger className="w-full">
-								<SelectValue placeholder="Select response range" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="minutes">Minutes</SelectItem>
-								<SelectItem value="hours">Hours</SelectItem>
-							</SelectContent>
-						</Select>
-					</div>
-				</div>
-			</CardContent>
-		</Card>
 	);
 }
