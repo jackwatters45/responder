@@ -2,7 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 import type { BusinessPreview } from "types/business-preview";
-import ConnectGoogle from "./connect-google";
+import ConnectGoogle from "./components/connect-google";
 import DashboardForm from "./form";
 
 async function getUserBusinesses(): Promise<BusinessPreview[]> {

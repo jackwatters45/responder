@@ -5,11 +5,12 @@ import { Button } from "~/app/_components/ui/button";
 import { useFormState } from "react-dom";
 import type { BusinessPreview } from "types/business-preview";
 
-import PricingCard from "../../_components/ui/pricing-card";
+import { getIsLastSingle } from "~/lib/utils";
+import { SubmitButton } from "../../_components/ui/submit-button";
 import { createConfig } from "./actions";
-import BusinessPreviewCard from "./business-preview-card";
-import ResponseSettingCard from "./response-setting-card";
-import { SubmitButton } from "./submit-button";
+import BusinessPreviewCard from "./components/business-preview-card";
+import PricingCard from "./components/pricing-card";
+import ResponseSettingCard from "./components/response-setting-card";
 
 const initialState = {
 	message: "",
@@ -33,7 +34,6 @@ const initialState = {
 // }
 
 // TODO
-// one business should fit whole row (grid -> fit full row when only one)
 // toggle mode get make work
 
 // filter show logic
@@ -88,10 +88,6 @@ export default function DashboardForm({ businesses }: OnboardingFormProps) {
 			</div>
 		</div>
 	);
-}
-
-export function getIsLastSingle(index: number, businessesLength: number) {
-	return index === businessesLength - 1 && businessesLength % 2 !== 0;
 }
 
 function ChooseBusinesses({ businesses }: { businesses: BusinessPreview[] }) {

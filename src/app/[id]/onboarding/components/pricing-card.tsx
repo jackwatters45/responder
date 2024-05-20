@@ -53,7 +53,7 @@ export default function PricingCard({
 					))}
 				</ul>
 			</CardContent>
-			<CardFooter className="pt-4 flex-1 items-end">
+			<CardFooter className="pt-4">
 				<Button variant={isSelected ? "secondary" : "outline"} className="w-full ">
 					{isSelected ? "Selected" : "Select"}
 				</Button>

@@ -10,14 +10,14 @@ import { Card, CardContent } from "~/app/_components/ui/card";
 export default async function Home() {
 	return (
 		<main className="flex flex-col">
-			<section className="bg-gray-900 py-20 md:py-32 text-white">
+			<section className="bg-secondary py-20 md:py-32">
 				<div className="container px-4 md:px-6">
 					<div className="grid md:grid-cols-2 items-center">
 						<div className="space-y-4">
 							<h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
 								Automate Your Google My Business Replies
 							</h1>
-							<p className="text-gray-300 text-lg md:text-xl">
+							<p className="text-muted-foreground text-lg md:text-xl">
 								Use OpenAI to generate personalized responses and save time managing
 								your Google My Business listings.
 							</p>
@@ -36,36 +36,36 @@ export default async function Home() {
 					</div>
 				</div>
 			</section>
-			<section className="py-12 md:py-20">
+			<section className="py-12 bg-background md:py-20">
 				<div className="container px-4 md:px-6">
 					<div className="space-y-8">
 						<div className="text-center">
 							<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
 								How it Works
 							</h2>
-							<p className="text-gray-500 mt-2 max-w-3xl mx-auto">
+							<p className="text-muted-foreground mt-2 max-w-3xl mx-auto">
 								Our app makes it easy to automate your Google My Business replies.
 							</p>
 						</div>
 						<div className="grid md:grid-cols-3 gap-8">
 							<div className="space-y-4 text-center">
-								<ClipboardIcon className="w-12 h-12 mx-auto text-gray-500" />
+								<ClipboardIcon className="w-12 h-12 mx-auto text-muted-foreground" />
 								<h3 className="text-xl font-semibold">Connect Your Accounts</h3>
-								<p className="text-gray-500">
+								<p className="text-muted-foreground ">
 									Link your Google My Business accounts to our app.
 								</p>
 							</div>
 							<div className="space-y-4 text-center">
-								<LightbulbIcon className="w-12 h-12 mx-auto text-gray-500" />
+								<LightbulbIcon className="w-12 h-12 mx-auto text-muted-foreground " />
 								<h3 className="text-xl font-semibold">Customize Responses</h3>
-								<p className="text-gray-500">
+								<p className="text-muted-foreground ">
 									Use our AI-powered tools to craft personalized responses.
 								</p>
 							</div>
 							<div className="space-y-4 text-center">
-								<RocketIcon className="w-12 h-12 mx-auto text-gray-500" />
+								<RocketIcon className="w-12 h-12 mx-auto text-muted-foreground " />
 								<h3 className="text-xl font-semibold">Automate and Save Time</h3>
-								<p className="text-gray-500">
+								<p className="text-muted-foreground ">
 									Schedule and automatically post your responses.
 								</p>
 							</div>
@@ -73,61 +73,61 @@ export default async function Home() {
 					</div>
 				</div>
 			</section>
-			<section className="bg-gray-100 py-12 md:py-20">
+			<section className="bg- py-12 bg-secondary md:py-20">
 				<div className="container px-4 md:px-6">
 					<div className="space-y-8">
 						<div className="text-center">
 							<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
 								Key Features
 							</h2>
-							<p className="text-gray-500 mt-2 max-w-3xl mx-auto">
+							<p className="text-muted-foreground  mt-2 max-w-3xl mx-auto">
 								Our app offers a range of features to streamline your Google My Business
 								management.
 							</p>
 						</div>
 						<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-							<div className="bg-white rounded-lg shadow-md p-6 space-y-4">
-								<SettingsIcon className="w-10 h-10 text-gray-500" />
+							<div className="bg-background rounded-lg shadow-md p-6 space-y-4">
+								<SettingsIcon className="w-10 h-10 text-muted-foreground " />
 								<h3 className="text-xl font-semibold">Customizable Responses</h3>
-								<p className="text-gray-500">
+								<p className="text-muted-foreground ">
 									Tailor your responses to each customer's needs using our AI-powered
 									tools.
 								</p>
 							</div>
-							<div className="bg-white rounded-lg shadow-md p-6 space-y-4">
-								<CalendarIcon className="w-10 h-10 text-gray-500" />
+							<div className="bg-background rounded-lg shadow-md p-6 space-y-4">
+								<CalendarIcon className="w-10 h-10 text-muted-foreground " />
 								<h3 className="text-xl font-semibold">Scheduling and Automation</h3>
-								<p className="text-gray-500">
+								<p className="text-muted-foreground ">
 									Schedule your responses in advance and let our app handle the rest.
 								</p>
 							</div>
-							<div className="bg-white rounded-lg shadow-md p-6 space-y-4">
-								<PieChartIcon className="w-10 h-10 text-gray-500" />
+							<div className="bg-background rounded-lg shadow-md p-6 space-y-4">
+								<PieChartIcon className="w-10 h-10 text-muted-foreground " />
 								<h3 className="text-xl font-semibold">Detailed Analytics</h3>
-								<p className="text-gray-500">
+								<p className="text-muted-foreground ">
 									Track the performance of your responses and optimize your strategy.
 								</p>
 							</div>
-							<div className="bg-white rounded-lg shadow-md p-6 space-y-4">
-								<SignalIcon className="w-10 h-10 text-gray-500" />
+							<div className="bg-background rounded-lg shadow-md p-6 space-y-4">
+								<SignalIcon className="w-10 h-10 text-muted-foreground " />
 								<h3 className="text-xl font-semibold">Real-time Notifications</h3>
-								<p className="text-gray-500">
+								<p className="text-muted-foreground ">
 									Get alerted when new reviews or messages come in, so you can respond
 									quickly.
 								</p>
 							</div>
-							<div className="bg-white rounded-lg shadow-md p-6 space-y-4">
-								<MergeIcon className="w-10 h-10 text-gray-500" />
+							<div className="bg-background rounded-lg shadow-md p-6 space-y-4">
+								<MergeIcon className="w-10 h-10 text-muted-foreground " />
 								<h3 className="text-xl font-semibold">Team Collaboration</h3>
-								<p className="text-gray-500">
+								<p className="text-muted-foreground ">
 									Invite your team members to manage your Google My Business listings
 									together.
 								</p>
 							</div>
-							<div className="bg-white rounded-lg shadow-md p-6 space-y-4">
-								<SettingsIcon className="w-10 h-10 text-gray-500" />
+							<div className="bg-background rounded-lg shadow-md p-6 space-y-4">
+								<SettingsIcon className="w-10 h-10 text-muted-foreground " />
 								<h3 className="text-xl font-semibold">Dedicated Support</h3>
-								<p className="text-gray-500">
+								<p className="text-muted-foreground ">
 									Our team is available to help you get the most out of our app.
 								</p>
 							</div>
@@ -142,15 +142,15 @@ export default async function Home() {
 							<h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
 								What Our Customers Say
 							</h2>
-							<p className="text-gray-500 mt-2 max-w-3xl mx-auto">
+							<p className="text-muted-foreground  mt-2 max-w-3xl mx-auto">
 								Hear from businesses that have used our app to streamline their Google
 								My Business management.
 							</p>
 						</div>
 						<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 							<Card>
-								<CardContent>
-									<blockquote className="text-lg font-medium text-gray-900 dark:text-gray-100">
+								<CardContent className="pt-6">
+									<blockquote className="text-lg font-medium text-foreground">
 										"Using this app has saved us so much time and hassle. The automated
 										responses are spot on, and we've seen a significant improvement in our
 										customer engagement."
@@ -162,16 +162,14 @@ export default async function Home() {
 										</Avatar>
 										<div>
 											<div className="font-medium">John Doe</div>
-											<div className="text-sm text-gray-500 dark:text-gray-400">
-												Owner, Acme Corp
-											</div>
+											<div className="text-sm text-muted-foreground">Owner, Acme Corp</div>
 										</div>
 									</div>
 								</CardContent>
 							</Card>
 							<Card>
-								<CardContent>
-									<blockquote className="text-lg font-medium text-gray-900 dark:text-gray-100">
+								<CardContent className="pt-6">
+									<blockquote className="text-lg font-medium text-foreground">
 										"This app has been a game-changer for our business. The AI-powered
 										responses are so natural and personalized, our customers can't even
 										tell they're automated."
@@ -183,7 +181,7 @@ export default async function Home() {
 										</Avatar>
 										<div>
 											<div className="font-medium">Jane Appleseed</div>
-											<div className="text-sm text-gray-500 dark:text-gray-400">
+											<div className="text-sm text-muted-foreground">
 												Marketing Manager, Widget Inc
 											</div>
 										</div>
@@ -191,8 +189,8 @@ export default async function Home() {
 								</CardContent>
 							</Card>
 							<Card>
-								<CardContent>
-									<blockquote className="text-lg font-medium text-gray-900 dark:text-gray-100">
+								<CardContent className="pt-6">
+									<blockquote className="text-lg font-medium text-foreground">
 										"I was skeptical at first, but this app has completely transformed the
 										way we manage our Google My Business listings. It's a must-have for
 										any business owner."
@@ -204,7 +202,7 @@ export default async function Home() {
 										</Avatar>
 										<div>
 											<div className="font-medium">Sarah Miller</div>
-											<div className="text-sm text-gray-500 dark:text-gray-400">
+											<div className="text-sm text-muted-foreground">
 												CEO, Startup Ventures
 											</div>
 										</div>
