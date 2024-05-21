@@ -5,16 +5,13 @@ import { Button } from "~/app/_components/ui/button";
 import { useFormState } from "react-dom";
 import type { BusinessPreview } from "types/business-preview";
 
+import { useState } from "react";
 import { getIsLastSingle } from "~/lib/utils";
 import { SubmitButton } from "../../_components/ui/submit-button";
-import { createConfig } from "./actions";
+import { createConfig, initialState } from "./actions";
 import BusinessPreviewCard from "./components/business-preview-card";
 import PricingCard from "./components/pricing-card";
 import ResponseSettingCard from "./components/response-setting-card";
-
-const initialState = {
-	message: "",
-};
 
 // You can use the React useOptimistic hook to optimistically update the UI before the Server Action finishes, rather than waiting for the response:
 // const [optimisticMessages, addOptimisticMessage] = useOptimistic<
@@ -34,11 +31,9 @@ const initialState = {
 // }
 
 // TODO
-// toggle mode get make work
-
 // filter show logic
 // default negative and positive review filters
-// specific logic (rendering, values, conditional shit, etc)
+// form logic (rendering, values, conditional shit, etc)
 // read dis: <https://nextjs.org/docs/app/building-your-application/data-fetching/patterns>
 // content will also defintely need to exist in the dashboard -> components
 
@@ -117,6 +112,8 @@ function ChooseBusinesses({ businesses }: { businesses: BusinessPreview[] }) {
 }
 
 function ChoosePlan() {
+	const [selectedPlan, setSelectedPlan] = useState<"free" | "premium">("free");
+
 	return (
 		<div>
 			<div className="space-y-8 pt-8">
@@ -136,7 +133,8 @@ function ChoosePlan() {
 							"Default negative and positive review filters",
 							"Automated review responses",
 						]}
-						isSelected={true}
+						isSelected={selectedPlan === "free"}
+						setIsSelected={() => setSelectedPlan("free")}
 					/>
 					<PricingCard
 						title="Premium"
@@ -148,7 +146,8 @@ function ChoosePlan() {
 							"Automated and manual review responses",
 							// "Detailed analytics and reporting",
 						]}
-						isSelected={false}
+						isSelected={selectedPlan === "premium"}
+						setIsSelected={() => setSelectedPlan("premium")}
 					/>
 				</div>
 			</div>
@@ -167,8 +166,8 @@ function ResponsePrompts() {
 					</div>
 				</div>
 				<div className="grid gap-6">
-					{[1, 2].map((id) => (
-						<ResponseSettingCard key={id} id={id.toString()} />
+					{[1, 2].map((filter) => (
+						<ResponseSettingCard key={filter} id={filter.toString()} />
 					))}
 				</div>
 			</div>

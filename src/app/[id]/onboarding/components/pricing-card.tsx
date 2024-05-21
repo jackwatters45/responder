@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "~/app/_components/ui/button";
+import { Button, ButtonLabel } from "~/app/_components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -9,6 +9,8 @@ import {
 	CardHeader,
 	CardTitle,
 } from "~/app/_components/ui/card";
+import { Input } from "~/app/_components/ui/input";
+import { Label } from "~/app/_components/ui/label";
 
 type Price = {
 	monthly: number;
@@ -22,6 +24,7 @@ interface PricingCardProps {
 	price: Price;
 	bulletPoints: string[];
 	isSelected: boolean;
+	setIsSelected: () => void;
 }
 
 export default function PricingCard({
@@ -30,10 +33,11 @@ export default function PricingCard({
 	price,
 	bulletPoints,
 	isSelected,
+	setIsSelected,
 }: PricingCardProps) {
 	return (
 		<Card
-			className="data-[selected=true]:border-2 data-[selected=true]:border-muted-foreground"
+			className="data-[selected=true]:ring-2 data-[selected=true]:ring-muted-foreground"
 			data-selected={isSelected}
 		>
 			<CardHeader className="space-y-4">
@@ -54,9 +58,21 @@ export default function PricingCard({
 				</ul>
 			</CardContent>
 			<CardFooter className="pt-4">
-				<Button variant={isSelected ? "secondary" : "outline"} className="w-full ">
+				<Input
+					type="radio"
+					name="plan"
+					id={title}
+					className="hidden"
+					onChange={() => setIsSelected()}
+				/>
+				<ButtonLabel
+					role="radio"
+					htmlFor={title}
+					variant={isSelected ? "muted" : "outline"}
+					className="w-full"
+				>
 					{isSelected ? "Selected" : "Select"}
-				</Button>
+				</ButtonLabel>
 			</CardFooter>
 		</Card>
 	);

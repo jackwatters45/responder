@@ -7,6 +7,7 @@ import type { LinkProps } from "next/link";
 import * as React from "react";
 
 import { cn } from "~/lib/utils";
+import { Label } from "./label";
 
 const buttonVariants = cva(
 	"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
@@ -19,6 +20,7 @@ const buttonVariants = cva(
 				outline:
 					"border border-input bg-background hover:bg-accent hover:text-accent-foreground",
 				secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+				muted: "bg-muted-foreground text-muted hover:bg-muted-foreground/80",
 				ghost: "hover:bg-accent hover:text-accent-foreground",
 				link: "text-primary underline-offset-4 hover:underline",
 			},
@@ -80,4 +82,21 @@ const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
 );
 ButtonLink.displayName = "ButtonLink";
 
-export { Button, ButtonLink, buttonVariants };
+export interface ButtonLabelProps
+	extends React.LabelHTMLAttributes<HTMLLabelElement>,
+		VariantProps<typeof buttonVariants> {}
+
+const ButtonLabel = React.forwardRef<HTMLLabelElement, ButtonLabelProps>(
+	({ className, variant, size, ...props }, ref) => {
+		return (
+			<Label
+				className={cn(buttonVariants({ variant, size, className }))}
+				ref={ref}
+				{...props}
+			/>
+		);
+	},
+);
+ButtonLabel.displayName = "ButtonLabel";
+
+export { Button, ButtonLink, ButtonLabel, buttonVariants };
