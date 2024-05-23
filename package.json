@@ -46,8 +46,8 @@
 		"posthog-js": "^1.132.0",
 		"posthog-node": "^4.0.1",
 		"rc-textarea": "^1.7.0",
-		"react": "19.0.0-rc-8f3c0525f9-20240521",
-		"react-dom": "19.0.0-rc-8f3c0525f9-20240521",
+		"react": "18.3.1",
+		"react-dom": "18.3.0",
 		"react-hook-form": "^7.51.5",
 		"server-only": "^0.0.1",
 		"stripe": "^15.7.0",
@@ -56,11 +56,11 @@
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
-		"debug": "^4.3.4",
 		"@biomejs/biome": "1.7.2",
 		"@types/node": "^20.12.12",
 		"@types/react": "^18.3.2",
 		"@types/react-dom": "^18.3.0",
+		"debug": "^4.3.4",
 		"drizzle-kit": "^0.20.18",
 		"lefthook": "^1.6.12",
 		"pg": "^8.11.5",
