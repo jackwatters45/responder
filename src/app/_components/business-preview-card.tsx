@@ -20,7 +20,7 @@ export default function ChooseBusinesses({
 }: { businesses: BusinessPreview[] }) {
 	return (
 		<fieldset>
-			<div className="space-y-8 pt-8">
+			<div className="space-y-8">
 				<div>
 					<legend className="text-2xl font-bold tracking-tight ">
 						Choose Business to Manage

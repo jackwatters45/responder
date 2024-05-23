@@ -5,8 +5,8 @@ import { useFormState } from "react-dom";
 import type { BusinessPreview } from "types/business-preview";
 import { createUserConfig } from "./actions";
 
+import ChooseBusinesses from "../../_components/business-preview-card";
 import { SubmitButton } from "../../_components/ui/submit-button";
-import ChooseBusinesses from "./components/business-preview-card";
 
 // TODO
 // Google part -> add the fake create there and persist the fake id created
@@ -28,7 +28,7 @@ export default function DashboardForm({
 	businesses,
 	accountId,
 }: OnboardingFormProps) {
-	const [error, formAction, isPending] = useFormState(createUserConfig, null);
+	const [error, formAction] = useFormState(createUserConfig, null);
 
 	const errors = error?.errors;
 
@@ -44,7 +44,7 @@ export default function DashboardForm({
 							Let's get you set up to start managing your reviews.
 						</p>
 					</div>
-					<form action={formAction} className="space-y-8">
+					<form action={formAction} className="space-y-8 pt-4">
 						<input type="text" hidden value={accountId} name="accountId" />
 						<ChooseBusinesses businesses={businesses} />
 						<div className="w-full flex items-center justify-between">
@@ -61,7 +61,8 @@ export default function DashboardForm({
 									))}
 							</div>
 							<SubmitButton>
-								<div>Complete Onboarding</div>
+								{/* TODO rename */}
+								Complete Onboarding
 							</SubmitButton>
 						</div>
 					</form>

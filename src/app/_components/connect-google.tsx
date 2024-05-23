@@ -10,10 +10,10 @@ import {
 
 export default function ConnectGoogle() {
 	return (
-		<Card>
+		<Card className="space-y-4 text-base">
 			<CardHeader className="space-y-4">
 				<CardTitle>Connect Google My Business</CardTitle>
-				<CardDescription className="space-y-4">
+				<CardDescription className="space-y-4 text-base">
 					<div className="text-muted-foreground">
 						Link your Google My Business account to start managing your reviews.
 					</div>
@@ -24,11 +24,7 @@ export default function ConnectGoogle() {
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
-				<Button
-					size="lg"
-					variant="outline"
-					className="w-full flex items-center gap-2"
-				>
+				<Button size="lg" className="w-full">
 					Connect Google My Business
 				</Button>
 			</CardContent>

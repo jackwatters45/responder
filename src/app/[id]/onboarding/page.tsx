@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { nanoid } from "nanoid";
 import type { BusinessPreview } from "types/business-preview";
-import ConnectGoogle from "./components/connect-google";
+import ConnectGoogle from "../../_components/connect-google";
 import DashboardForm from "./form";
 
 async function getUserBusinesses(): Promise<BusinessPreview[]> {

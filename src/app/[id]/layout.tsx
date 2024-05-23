@@ -29,6 +29,10 @@ export default async function Layout({
 								title: "Home",
 							},
 							{
+								href: `/${id}/filters`,
+								title: "Filters",
+							},
+							{
 								href: `/${id}/settings`,
 								title: "Settings",
 							},
