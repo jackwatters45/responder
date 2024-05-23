@@ -12,15 +12,13 @@ interface BusinessesFormProps {
 	businesses: BusinessPreview[];
 }
 
-export default async function BusinessesFormProps({
-	businesses,
-}: BusinessesFormProps) {
+export default function BusinessesForm({ businesses }: BusinessesFormProps) {
 	const [error, formAction] = useFormState(editActiveBusinesses, null);
 
 	return (
-		<form action={formAction} className="space-y-8">
+		<form action={formAction} className="p-6 border rounded-lg shadow-md">
 			<ChooseBusinesses businesses={businesses} />
-			<div className="w-full flex items-center justify-between">
+			<div className="w-full flex items-center justify-between pt-6">
 				<div className="flex-1">
 					{error && (
 						<ul aria-live="polite" className="text-destructive">

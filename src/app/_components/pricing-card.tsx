@@ -28,7 +28,7 @@ interface PricingCardProps {
 	setIsSelected: () => void;
 }
 
-export default function PricingCard({
+function PricingCard({
 	name,
 	description,
 	price,
@@ -81,12 +81,12 @@ export default function PricingCard({
 	);
 }
 
-function ChoosePlan() {
+export default function ChoosePlan() {
 	const [selectedPlan, setSelectedPlan] = useState<"free" | "premium">("free");
 
 	return (
 		<div>
-			<div className="space-y-8 pt-8">
+			<div className="space-y-8">
 				<div className="space-y-2">
 					<div className="text-2xl font-bold">Choose Your Plan</div>
 					<div className=" text-muted-foreground ">

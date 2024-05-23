@@ -10,6 +10,7 @@ import { SubmitButton } from "../../_components/ui/submit-button";
 
 // TODO
 // Google part -> add the fake create there and persist the fake id created
+// do dumb onboarding flow
 
 // enforce select single or something figure out logic there
 //  more than one selected business -> premium (modal or something)
@@ -18,6 +19,9 @@ import { SubmitButton } from "../../_components/ui/submit-button";
 // default negative and positive review filters
 // form logic (rendering, values, conditional shit, etc)
 // content will also defintely need to exist in the dashboard -> components
+
+// layout is meh
+// width or right thingy
 
 interface OnboardingFormProps {
 	businesses: BusinessPreview[];
@@ -44,10 +48,10 @@ export default function DashboardForm({
 							Let's get you set up to start managing your reviews.
 						</p>
 					</div>
-					<form action={formAction} className="space-y-8 pt-4">
-						<input type="text" hidden value={accountId} name="accountId" />
+					<form action={formAction} className="p-6 border rounded-lg shadow-md">
 						<ChooseBusinesses businesses={businesses} />
-						<div className="w-full flex items-center justify-between">
+						<input type="text" hidden value={accountId} name="accountId" />
+						<div className="w-full flex items-center justify-between pt-6">
 							<div className="flex-1">
 								{errors?.businesses ||
 									(errors?.accountId && (

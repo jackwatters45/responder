@@ -61,9 +61,7 @@ export default async function Settings() {
 						<h1 className="text-3xl font-bold tracking-tight md:text-4xl">
 							Settings
 						</h1>
-						<p className="pt-4 text-muted-foreground">
-							Manage your account settings.
-						</p>
+						<p className="pt-4 text-muted-foreground">Manage your account settings</p>
 					</div>
 					<SettingsForm businesses={businesses} />
 				</div>

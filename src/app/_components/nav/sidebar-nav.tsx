@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { cn } from "~/lib/utils";
 import { SidebarItem } from "./sidebar-item";
 
@@ -11,7 +10,7 @@ export interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
 	items: Array<SidebarNavItem>;
 }
 
-export default function Sidebar({
+export default async function Sidebar({
 	className,
 	items,
 	...props

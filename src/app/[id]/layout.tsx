@@ -37,10 +37,6 @@ export default async function Layout({
 								title: "Settings",
 							},
 							{
-								href: `/${id}/onboarding`,
-								title: "Onboarding",
-							},
-							{
 								href: `/${id}/billing`,
 								title: "Plan & Billing",
 							},

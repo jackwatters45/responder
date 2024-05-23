@@ -2,6 +2,7 @@ import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
 import { Button } from "~/app/_components/ui/button";
 import { addBusinessAccount, getUserBusiness } from "~/server/queries";
+import ComingSoon from "../_components/errors/coming-soon";
 
 export default async function Dashboard({
 	params: { id },
@@ -13,7 +14,7 @@ export default async function Dashboard({
 	return (
 		<>
 			{!business && <ConnectBusiness />}
-			<span>more content</span>
+			<ComingSoon />
 		</>
 	);
 }
