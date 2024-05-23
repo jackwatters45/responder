@@ -42,7 +42,9 @@ export default async function Layout({
 							},
 						]}
 					/>
-					<div className="col-span-3 lg:col-span-4 p-5">{children}</div>
+					<div className="col-span-3 lg:col-span-4 p-5 pt-[4.25rem] lg:pt-5">
+						{children}
+					</div>
 				</div>
 			</SignedIn>
 			<SignedOut>

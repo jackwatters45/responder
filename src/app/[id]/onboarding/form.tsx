@@ -1,54 +1,36 @@
 "use client";
 
-import { Button } from "~/app/_components/ui/button";
-
 import { useFormState } from "react-dom";
+
 import type { BusinessPreview } from "types/business-preview";
+import { createUserConfig } from "./actions";
 
-import { useState } from "react";
-import { getIsLastSingle } from "~/lib/utils";
 import { SubmitButton } from "../../_components/ui/submit-button";
-import { createConfig, initialState } from "./actions";
-import BusinessPreviewCard from "./components/business-preview-card";
-import PricingCard from "./components/pricing-card";
-import ResponseSettingCard from "./components/response-setting-card";
-
-// You can use the React useOptimistic hook to optimistically update the UI before the Server Action finishes, rather than waiting for the response:
-// const [optimisticMessages, addOptimisticMessage] = useOptimistic<
-// Message[],
-// string
-// >(messages, (state, newMessage) => [...state, { message: newMessage }])
-
-// programatic form submission
-// const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-// 	if (
-// 		(e.ctrlKey || e.metaKey) &&
-// 		(e.key === 'Enter' || e.key === 'NumpadEnter')
-// 	) {
-// 		e.preventDefault()
-// 		e.currentTarget.form?.requestSubmit()
-// 	}
-// }
+import ChooseBusinesses from "./components/business-preview-card";
 
 // TODO
-// filter show logic
+// Google part -> add the fake create there and persist the fake id created
+
+// enforce select single or something figure out logic there
+//  more than one selected business -> premium (modal or something)
+
+// filter
 // default negative and positive review filters
 // form logic (rendering, values, conditional shit, etc)
-// read dis: <https://nextjs.org/docs/app/building-your-application/data-fetching/patterns>
 // content will also defintely need to exist in the dashboard -> components
-
-// would move to actions file
-
-// how to add additional arguments
-// const updateUserWithId = updateUser.bind(null, userId)
-// export async function updateUser(userId, formData) {
 
 interface OnboardingFormProps {
 	businesses: BusinessPreview[];
+	accountId: string;
 }
 
-export default function DashboardForm({ businesses }: OnboardingFormProps) {
-	const [state, formAction] = useFormState(createConfig, initialState);
+export default function DashboardForm({
+	businesses,
+	accountId,
+}: OnboardingFormProps) {
+	const [error, formAction, isPending] = useFormState(createUserConfig, null);
+
+	const errors = error?.errors;
 
 	return (
 		<div className="container mx-auto px-4 md:px-6">
@@ -63,112 +45,26 @@ export default function DashboardForm({ businesses }: OnboardingFormProps) {
 						</p>
 					</div>
 					<form action={formAction} className="space-y-8">
+						<input type="text" hidden value={accountId} name="accountId" />
 						<ChooseBusinesses businesses={businesses} />
-						<ChoosePlan />
-						<ResponsePrompts />
 						<div className="w-full flex items-center justify-between">
-							<Button className="mr-auto" variant="outline">
-								+ Add Filter
-							</Button>
+							<div className="flex-1">
+								{errors?.businesses ||
+									(errors?.accountId && (
+										<ul aria-live="polite" className="text-destructive">
+											{(errors?.businesses ?? [])
+												.concat(errors?.accountId ?? [])
+												.map((e) => (
+													<li key={e}>{e}</li>
+												))}
+										</ul>
+									))}
+							</div>
 							<SubmitButton>
 								<div>Complete Onboarding</div>
 							</SubmitButton>
 						</div>
-						{/* error example */}
-						<p aria-live="polite" className="sr-only">
-							{state?.message}
-						</p>
 					</form>
-				</div>
-			</div>
-		</div>
-	);
-}
-
-function ChooseBusinesses({ businesses }: { businesses: BusinessPreview[] }) {
-	return (
-		<div className="space-y-8 pt-8">
-			<div>
-				<h1 className="text-2xl font-bold tracking-tight ">
-					Choose Business to Manage
-				</h1>
-				<p className="pt-4 text-muted-foreground">
-					One business is included with the free plan. Upgrade to manage multiple
-					businesses.
-				</p>
-			</div>
-			<div className="grid grid-cols-2 gap-4">
-				{businesses.map((business, i) => (
-					<BusinessPreviewCard
-						key={business.id}
-						{...business}
-						selected={false}
-						isLastSingle={getIsLastSingle(i, businesses.length)}
-					/>
-				))}
-			</div>
-		</div>
-	);
-}
-
-function ChoosePlan() {
-	const [selectedPlan, setSelectedPlan] = useState<"free" | "premium">("free");
-
-	return (
-		<div>
-			<div className="space-y-8 pt-8">
-				<div className="space-y-2">
-					<div className="text-2xl font-bold">Choose Your Plan</div>
-					<div className=" text-muted-foreground ">
-						Upgrade to unlock premium features and manage multiple businesses.
-					</div>
-				</div>
-				<div className="grid grid-cols-2 gap-4">
-					<PricingCard
-						title="Free"
-						description="For small businesses looking to manage a single location using only basic features."
-						price={{ monthly: 0, yearly: 0 }}
-						bulletPoints={[
-							"Single business",
-							"Default negative and positive review filters",
-							"Automated review responses",
-						]}
-						isSelected={selectedPlan === "free"}
-						setIsSelected={() => setSelectedPlan("free")}
-					/>
-					<PricingCard
-						title="Premium"
-						description="For growing businesses looking to manage multiple locations and unlock premium features."
-						price={{ monthly: 5, yearly: 50 }}
-						bulletPoints={[
-							"Multiple Businesses",
-							"Custom review filters",
-							"Automated and manual review responses",
-							// "Detailed analytics and reporting",
-						]}
-						isSelected={selectedPlan === "premium"}
-						setIsSelected={() => setSelectedPlan("premium")}
-					/>
-				</div>
-			</div>
-		</div>
-	);
-}
-
-function ResponsePrompts() {
-	return (
-		<div>
-			<div className="space-y-8 pt-8">
-				<div className="space-y-2">
-					<div className="text-2xl font-bold">Add Filters</div>
-					<div className=" text-muted-foreground ">
-						Configure your filters based on review rating
-					</div>
-				</div>
-				<div className="grid gap-6">
-					{[1, 2].map((filter) => (
-						<ResponseSettingCard key={filter} id={filter.toString()} />
-					))}
 				</div>
 			</div>
 		</div>

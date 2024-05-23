@@ -1,5 +1,5 @@
 export interface BusinessPreview {
-	id: number;
+	id: string;
 	name: string;
 	type: string;
 	address: { street: string; city: string; state: string; zip: string };

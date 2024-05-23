@@ -1,79 +1,71 @@
 "use server";
 
 import { auth } from "@clerk/nextjs/server";
+import debug from "debug";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { db } from "~/server/db";
+import { accounts, locations } from "~/server/db/schema";
 
-const filter = z.object({
-	name: z.string({ invalid_type_error: "Invalid Filter" }),
-});
-
-export type Filter = z.infer<typeof filter>;
-
-const defaultFilter: Filter = {
-	name: "",
-};
+const log = debug("responder:onboarding:actions");
 
 const onboardingSchema = z.object({
-	businesses: z.array(
-		z.string({
-			invalid_type_error: "Invalid Business",
-		}),
-	),
-	plan: z.enum(["free", "premium"], {
-		invalid_type_error: "Invalid Plan",
-	}),
-	filters: z.array(filter),
+	businesses: z.array(z.string()),
+	accountId: z.string(),
 });
 
-type OnboardingSchema = z.infer<typeof onboardingSchema>;
+export async function createUserConfig(prevState: unknown, formData: FormData) {
+	const user = auth().protect();
 
-export const defaultOnboardingSchema: OnboardingSchema = {
-	plan: "free",
-	businesses: [],
-	filters: [],
-};
-
-export const initialState = {
-	error: {
-		businesses: "",
-		plan: "",
-		filters: "",
-	},
-};
-
-export async function createConfig(prevState: unknown, formData: FormData) {
-	auth().protect();
-
-	const username = auth().sessionClaims?.username;
+	const username = user.sessionClaims?.username;
 
 	try {
+		const businesses: string[] = [];
+		for (const [key] of formData.entries()) {
+			// group businesses
+			if (/^business\./.test(key)) {
+				const businessId = key.split(".")[1];
+				if (!businessId) throw Error("business must have an id");
+				businesses.push(businessId);
+			}
+		}
+
 		// validate using zod backend and justt use native html frontend
 		const validatedFields = onboardingSchema.safeParse({
-			businesses: formData.getAll("businesses"),
-			plan: formData.get("plan"),
-			filters: formData.getAll("filters"),
+			businesses: businesses,
+			accountId: formData.get("accountId"),
 		});
 
 		// Return early if the form data is invalid
 		if (!validatedFields.success) {
+			log("errors", validatedFields.error.flatten().fieldErrors);
 			return {
 				errors: validatedFields.error.flatten().fieldErrors,
 			};
 		}
 
-		const rawFormData = Object.fromEntries(formData);
+		//
+		//
+		// TODO delete
+		await db.insert(accounts).values({
+			id: validatedFields.data.accountId,
+			userId: user.userId,
+		});
+		//
+		//
+		//
 
-		// do something with the data
-		console.log(rawFormData);
+		await db.insert(locations).values(
+			validatedFields.data.businesses.map((id) => ({
+				id,
+				accountId: validatedFields.data.accountId,
+			})),
+		);
 
-		// return the new state
-		return {
-			message: "Successfully updated",
-		};
+		return null;
 	} catch (e) {
 		console.error(e);
+	} finally {
+		redirect(`/${username ?? "dashboard"}`);
 	}
-
-	redirect(`/${username ?? "dashboard"}`);
 }

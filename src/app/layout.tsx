@@ -5,8 +5,8 @@ import { Inter } from "next/font/google";
 import Link from "next/link";
 
 import { TopNav } from "./_components/nav/top-nav";
-import { ThemeProvider } from "./_components/theme-provider";
 import { Toaster } from "./_components/ui/toaster";
+import { ThemeProvider } from "./theme-provider";
 
 const inter = Inter({
 	subsets: ["latin"],
