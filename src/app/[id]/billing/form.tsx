@@ -1,6 +1,9 @@
-import { auth } from "@clerk/nextjs/server";
+"use client";
 
+import { useState } from "react";
+import type { Plan } from "types";
 import { titleCase } from "~/lib/utils";
+import { selectPlan } from "./actions";
 
 import { Button } from "~/app/_components/ui/button";
 import {
@@ -11,14 +14,13 @@ import {
 	CardHeader,
 	CardTitle,
 } from "~/app/_components/ui/card";
+import { toast } from "~/app/_components/ui/use-toast";
 
-export default async function ChoosePlan({
-	plan,
-}: { plan: "free" | "premium" }) {
-	// const [selectedPlan, setSelectedPlan] = useState<>("free");
+export default function ChoosePlan({ plan }: { plan: Plan }) {
+	const [selectedPlan, setSelectedPlan] = useState<Plan>(plan);
 
 	return (
-		<div>
+		<div className="p-6 border rounded-lg shadow-md">
 			<div className="space-y-8">
 				<div className="space-y-2">
 					<div className="text-2xl font-bold">Choose Your Plan</div>
@@ -36,8 +38,8 @@ export default async function ChoosePlan({
 							"Default negative and positive review filters",
 							"Automated review responses",
 						]}
-						isSelected={plan === "free"}
-						// setIsSelected={() => setSelectedPlan("free")}
+						isSelected={selectedPlan === "free"}
+						setSelectedPlan={setSelectedPlan}
 					/>
 					<PricingCard
 						name="premium"
@@ -49,8 +51,8 @@ export default async function ChoosePlan({
 							"Automated and manual review responses",
 							// "Detailed analytics and reporting",
 						]}
-						isSelected={plan === "premium"}
-						// setIsSelected={() => setSelectedPlan("premium")}
+						isSelected={selectedPlan === "premium"}
+						setSelectedPlan={setSelectedPlan}
 					/>
 				</div>
 			</div>
@@ -65,21 +67,21 @@ type Price = {
 
 interface PricingCardProps {
 	buttonVariant?: "outline" | "secondary";
-	name: string;
+	name: Plan;
 	description: string | React.ReactNode | null;
 	price: Price;
 	bulletPoints: string[];
 	isSelected: boolean;
-	// setIsSelected: () => void;
+	setSelectedPlan: (action: Plan) => void;
 }
 
-async function PricingCard({
+function PricingCard({
 	name,
 	description,
 	price,
 	bulletPoints,
 	isSelected,
-	// setIsSelected,
+	setSelectedPlan,
 }: PricingCardProps) {
 	return (
 		<Card
@@ -104,16 +106,21 @@ async function PricingCard({
 				</ul>
 			</CardContent>
 			<CardFooter className="pt-4">
-				<form className="w-full" action={""}>
-					{/* <Input
-						type="radio"
-						name="plan"
-						id={name}
-						value={name}
-						className="hidden"
-						onChange={() => setIsSelected()}
-						defaultChecked={isSelected}
-					/> */}
+				<form
+					className="w-full"
+					action={async () => {
+						setSelectedPlan(name);
+						const res = await selectPlan(name);
+						if (!res) {
+							setSelectedPlan(name === "free" ? "premium" : "free");
+							toast({
+								title: "Failed to select plan",
+								description: "An unexpected error occurred. Please try again.",
+								variant: "destructive",
+							});
+						}
+					}}
+				>
 					<Button
 						type="submit"
 						variant={isSelected ? "default" : "outline"}

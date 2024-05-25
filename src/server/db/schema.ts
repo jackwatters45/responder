@@ -2,7 +2,7 @@
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
 import { sql } from "drizzle-orm";
-import { pgTableCreator, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { pgEnum, pgTableCreator, text, timestamp } from "drizzle-orm/pg-core";
 
 export const createTable = pgTableCreator((name) => `responder_${name}`);
 
@@ -26,9 +26,12 @@ export const locations = createTable("google-mybusiness-location", {
 		}),
 });
 
-export const configs = createTable("config", {
-	id: serial("id").primaryKey(),
+export const planEnum = pgEnum("plan", ["free", "premium"]);
+
+export const users = createTable("user", {
+	id: text("id").primaryKey(),
 	userId: text("userId").notNull(),
+	plan: planEnum("plan").default("free").notNull(),
 
 	// ie - prompt
 	// ie - filter (negative, positive) (actual cutoff)

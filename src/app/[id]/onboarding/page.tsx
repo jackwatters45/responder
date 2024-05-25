@@ -2,7 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 import { nanoid } from "nanoid";
-import type { BusinessPreview } from "types/business-preview";
+import type { BusinessPreview } from "types";
 import ConnectGoogle from "../../_components/connect-google";
 import DashboardForm from "./form";
 

@@ -2,7 +2,7 @@
 
 import { useFormState } from "react-dom";
 
-import type { BusinessPreview } from "types/business-preview";
+import type { BusinessPreview } from "types";
 import { createUserConfig } from "./actions";
 
 import ChooseBusinesses from "../../_components/business-preview-card";

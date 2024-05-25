@@ -6,3 +6,5 @@ export interface BusinessPreview {
 	rating: number;
 	reviewCount: number;
 }
+
+export type Plan = "free" | "premium";

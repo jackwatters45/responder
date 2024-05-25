@@ -2,7 +2,7 @@
 
 import { useFormState } from "react-dom";
 
-import type { BusinessPreview } from "types/business-preview";
+import type { BusinessPreview } from "types";
 import { editActiveBusinesses } from "./actions";
 
 import { SubmitButton } from "~/app/_components/ui/submit-button";

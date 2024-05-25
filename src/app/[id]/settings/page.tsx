@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import type { BusinessPreview } from "types/business-preview";
+import type { BusinessPreview } from "types";
 import ConnectGoogle from "~/app/_components/connect-google";
 import SettingsForm from "./form";
 

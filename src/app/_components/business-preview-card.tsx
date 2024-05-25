@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import type { BusinessPreview } from "types/business-preview";
+import type { BusinessPreview } from "types";
 import { cn, getIsLastSingle } from "~/lib/utils";
 
 import {
