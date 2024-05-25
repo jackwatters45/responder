@@ -13,10 +13,6 @@ const coreConfig = {
 		ignoreDuringBuilds: true,
 	},
 
-	experimental: {
-		reactCompiler: true,
-	},
-
 	async rewrites() {
 		return [
 			{

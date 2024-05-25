@@ -85,7 +85,7 @@ function PricingCard({
 }: PricingCardProps) {
 	return (
 		<Card
-			className="data-[selected=true]:ring-2 data-[selected=true]:ring-muted-foreground"
+			className="data-[selected=true]:ring-2 data-[selected=true]:ring-muted-foreground transition-colors"
 			data-selected={isSelected}
 		>
 			<CardHeader className="space-y-4">
@@ -109,7 +109,6 @@ function PricingCard({
 				<form
 					className="w-full"
 					action={async () => {
-						setSelectedPlan(name);
 						const res = await selectPlan(name);
 						if (!res) {
 							setSelectedPlan(name === "free" ? "premium" : "free");
@@ -124,7 +123,8 @@ function PricingCard({
 					<Button
 						type="submit"
 						variant={isSelected ? "default" : "outline"}
-						className="w-full"
+						className="w-full transition-colors"
+						onClick={() => setSelectedPlan(name)}
 					>
 						{isSelected ? "Selected" : "Select"}
 					</Button>
