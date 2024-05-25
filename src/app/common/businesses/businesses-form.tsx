@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import type { BusinessPreview } from "types";
 import { cn, getIsLastSingle } from "~/lib/utils";
+import { editActiveBusinesses } from "./actions";
 
 import {
 	Card,
@@ -12,35 +13,24 @@ import {
 	CardHeader,
 	CardTitle,
 } from "~/app/_components/ui/card";
-import { Label } from "~/app/_components/ui/label";
 import { Switch } from "~/app/_components/ui/switch";
+import { toast } from "~/app/_components/ui/use-toast";
 
-export default function ChooseBusinesses({
-	businesses,
-}: { businesses: BusinessPreview[] }) {
+interface BusinessesFormProps {
+	businesses: BusinessPreview[];
+}
+
+export default function BusinessesForm({ businesses }: BusinessesFormProps) {
 	return (
-		<fieldset>
-			<div className="space-y-8">
-				<div>
-					<legend className="text-2xl font-bold tracking-tight ">
-						Choose Business to Manage
-					</legend>
-					<p className="pt-4 text-muted-foreground">
-						One business is included with the free plan. Upgrade later to manage
-						multiple businesses.
-					</p>
-				</div>
-				<div className="grid grid-cols-2 gap-4">
-					{businesses.map((business, i) => (
-						<BusinessPreviewCard
-							key={business.id}
-							{...business}
-							isLastSingle={getIsLastSingle(i, businesses.length)}
-						/>
-					))}
-				</div>
-			</div>
-		</fieldset>
+		<div className="grid grid-cols-2 gap-4">
+			{businesses.map((business, i) => (
+				<BusinessPreviewCard
+					key={business.id}
+					{...business}
+					isLastSingle={getIsLastSingle(i, businesses.length)}
+				/>
+			))}
+		</div>
 	);
 }
 
@@ -73,17 +63,27 @@ function BusinessPreviewCard(
 					<div className="text-xl font-bold">{props.rating}</div>
 					<div className="text-muted-foreground">({props.reviewCount} reviews)</div>
 				</div>
-				<Label
-					htmlFor={`${props.id}-toggle-input`}
+				<form
 					className="self-end sm:self-auto pt-4 sm:pt-0"
+					action={async (formData) => {
+						const res = await editActiveBusinesses(props.id, formData);
+						if (!res) {
+							toast({
+								title: "Failed to select plan",
+								description: "An unexpected error occurred. Please try again.",
+								variant: "destructive",
+							});
+						}
+					}}
 				>
 					<Switch
-						name={`business.${props.id}`}
+						name={props.id}
 						id={`${props.id}-toggle`}
 						onCheckedChange={() => setSelected((prev) => !prev)}
 						defaultChecked={false}
+						type="submit"
 					/>
-				</Label>
+				</form>
 			</CardContent>
 		</Card>
 	);

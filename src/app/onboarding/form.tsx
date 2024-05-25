@@ -5,8 +5,8 @@ import { useFormState } from "react-dom";
 import type { BusinessPreview } from "types";
 import { createUserConfig } from "./actions";
 
-import ChooseBusinesses from "../../_components/business-preview-card";
-import { SubmitButton } from "../../_components/ui/submit-button";
+import { SubmitButton } from "../_components/ui/submit-button";
+import BusinessesForm from "../common/businesses/businesses-form";
 
 // TODO
 // Google part -> add the fake create there and persist the fake id created
@@ -49,7 +49,7 @@ export default function DashboardForm({
 						</p>
 					</div>
 					<form action={formAction} className="p-6 border rounded-lg shadow-md">
-						<ChooseBusinesses businesses={businesses} />
+						<BusinessesForm businesses={businesses} />
 						<input type="text" hidden value={accountId} name="accountId" />
 						<div className="w-full flex items-center justify-between pt-6">
 							<div className="flex-1">

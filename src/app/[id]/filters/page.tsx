@@ -1,20 +1,24 @@
-import ComingSoon from "~/app/_components/errors/coming-soon";
+import { nanoid } from "nanoid";
 
-export default async function Filters() {
-	// TODO change text
+import type { Filter } from "types";
+import { getFilters, saveFilters } from "./actions";
+import Filters from "./form";
+
+export default async function Page() {
+	const filters = await getFilters();
 	return (
 		<div className="container mx-auto px-4 md:px-6">
 			<div className="mx-auto max-w-3xl pt-12 pb-24">
 				<div className="space-y-8">
 					<div>
-						<h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-							Settings
-						</h1>
+						<h1 className="text-3xl font-bold tracking-tight md:text-4xl">Filters</h1>
 						<p className="pt-4 text-muted-foreground">
-							Manage your account settings.
+							Configure your filters based on review rating
 						</p>
 					</div>
-					<ComingSoon />
+					<form action={saveFilters}>
+						<Filters filters={filters} />
+					</form>
 				</div>
 			</div>
 		</div>

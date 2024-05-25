@@ -2,7 +2,13 @@
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
 import { sql } from "drizzle-orm";
-import { pgEnum, pgTableCreator, text, timestamp } from "drizzle-orm/pg-core";
+import {
+	boolean,
+	pgEnum,
+	pgTableCreator,
+	text,
+	timestamp,
+} from "drizzle-orm/pg-core";
 
 export const createTable = pgTableCreator((name) => `responder_${name}`);
 
@@ -24,6 +30,7 @@ export const locations = createTable("google-mybusiness-location", {
 			onDelete: "cascade",
 			onUpdate: "no action",
 		}),
+	active: boolean("active").default(false).notNull(),
 });
 
 export const planEnum = pgEnum("plan", ["free", "premium"]);

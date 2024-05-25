@@ -1,7 +1,9 @@
 import { nanoid } from "nanoid";
+
 import type { BusinessPreview } from "types";
+
 import ConnectGoogle from "~/app/_components/connect-google";
-import SettingsForm from "./form";
+import BusinessesForm from "~/app/common/businesses/businesses-form";
 
 async function getUserBusinesses(): Promise<BusinessPreview[]> {
 	return [
@@ -63,7 +65,18 @@ export default async function Settings() {
 						</h1>
 						<p className="pt-4 text-muted-foreground">Manage your account settings</p>
 					</div>
-					<SettingsForm businesses={businesses} />
+					<div className="space-y-8 p-6 border rounded-lg shadow-md">
+						<div>
+							<legend className="text-2xl font-bold tracking-tight ">
+								Choose Business to Manage
+							</legend>
+							<p className="pt-4 text-muted-foreground">
+								One business is included with the free plan. Upgrade later to manage
+								multiple businesses.
+							</p>
+						</div>
+						<BusinessesForm businesses={businesses} />
+					</div>
 				</div>
 			</div>
 		</div>
