@@ -1,7 +1,6 @@
 "use client";
-import { SignInButton, SignOutButton, SignUp, useClerk } from "@clerk/nextjs";
-import { Suspense } from "react";
-// import { useEffect, useState } from "react";
+
+import { useClerk } from "@clerk/nextjs";
 import { Button, ButtonLink } from "~/app/_components/ui/button";
 
 export default function NotFound({

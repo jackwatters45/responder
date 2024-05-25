@@ -1,6 +1,7 @@
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
+import { Button } from "../ui/button";
 import {
 	NavigationMenu,
 	NavigationMenuItem,
@@ -40,8 +41,12 @@ export async function TopNav() {
 			</NavigationMenuItem>
 			<div>
 				<SignedOut>
-					<ThemeToggle />
-					<SignInButton />
+					<div className="flex items-center gap-6 text-sm font-normal">
+						<ThemeToggle />
+						<SignInButton>
+							<Button variant={"outline"}>Sign In</Button>
+						</SignInButton>
+					</div>
 				</SignedOut>
 				<SignedIn>
 					<div className="flex items-center gap-6 text-sm font-normal">
