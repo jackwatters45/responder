@@ -2,11 +2,11 @@
 
 import { useFormState } from "react-dom";
 
-import type { BusinessPreview } from "types";
+import type { SelectLocation } from "types";
 import { createUserConfig } from "./actions";
 
+import BusinessesForm from "../_components/businesses/businesses-form";
 import { SubmitButton } from "../_components/ui/submit-button";
-import BusinessesForm from "../common/businesses/businesses-form";
 
 // TODO
 // Google part -> add the fake create there and persist the fake id created
@@ -24,7 +24,7 @@ import BusinessesForm from "../common/businesses/businesses-form";
 // width or right thingy
 
 interface OnboardingFormProps {
-	businesses: BusinessPreview[];
+	businesses: SelectLocation[];
 	accountId: string;
 }
 

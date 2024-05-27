@@ -1,22 +1,21 @@
 import { nanoid } from "nanoid";
 
-import type { BusinessPreview } from "types";
+import type { SelectLocation } from "types";
 
+import BusinessesForm from "~/app/_components/businesses/businesses-form";
 import ConnectGoogle from "~/app/_components/connect-google";
-import BusinessesForm from "~/app/common/businesses/businesses-form";
 
-async function getUserBusinesses(): Promise<BusinessPreview[]> {
+// TODO
+async function getUserBusinesses(): Promise<Partial<SelectLocation>[]> {
 	return [
 		{
 			id: nanoid(),
 			name: "Business 1",
 			type: "Google My Business",
-			address: {
-				street: "123 First St",
-				city: "Springfield",
-				state: "IL",
-				zip: "62701",
-			},
+			street: "123 First St",
+			city: "Springfield",
+			state: "IL",
+			zip: "62701",
 			rating: 4.5,
 			reviewCount: 100,
 		},
@@ -24,12 +23,10 @@ async function getUserBusinesses(): Promise<BusinessPreview[]> {
 			id: nanoid(),
 			name: "Business 2",
 			type: "Google My Business 2",
-			address: {
-				street: "321 Second St",
-				city: "Springfield",
-				state: "IL",
-				zip: "62701",
-			},
+			street: "321 Second St",
+			city: "Springfield",
+			state: "IL",
+			zip: "62701",
 			rating: 4.2,
 			reviewCount: 55,
 		},
@@ -37,12 +34,10 @@ async function getUserBusinesses(): Promise<BusinessPreview[]> {
 			id: nanoid(),
 			name: "Business 3",
 			type: "Google My Business 3",
-			address: {
-				street: "231 Third St",
-				city: "Springfield",
-				state: "IL",
-				zip: "62701",
-			},
+			street: "231 Third St",
+			city: "Springfield",
+			state: "IL",
+			zip: "62701",
 			rating: 3.8,
 			reviewCount: 62,
 		},

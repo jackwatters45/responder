@@ -4,10 +4,9 @@ import { env } from "~/env";
 
 export default {
 	schema: "./src/server/db/schema.ts",
-	driver: "pg",
+	dialect: "postgresql",
 	dbCredentials: {
-		connectionString:
-			env.NODE_ENV === "production" ? env.POSTGRES_URL : env.DATABASE_URL,
+		url: env.NODE_ENV === "production" ? env.POSTGRES_URL : env.DATABASE_URL,
 	},
 	tablesFilter: ["responder_*"],
 } satisfies Config;

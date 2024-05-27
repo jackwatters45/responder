@@ -1,11 +1,12 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { sql } from "drizzle-orm";
+import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import {
 	boolean,
 	pgEnum,
 	pgTableCreator,
+	real,
 	text,
 	timestamp,
 } from "drizzle-orm/pg-core";
@@ -31,16 +32,12 @@ export const locations = createTable("google-mybusiness-location", {
 			onUpdate: "no action",
 		}),
 	active: boolean("active").default(false).notNull(),
-});
-
-export const planEnum = pgEnum("plan", ["free", "premium"]);
-
-export const users = createTable("user", {
-	id: text("id").primaryKey(),
-	userId: text("userId").notNull(),
-	plan: planEnum("plan").default("free").notNull(),
-
-	// ie - prompt
-	// ie - filter (negative, positive) (actual cutoff)
-	// delay range
+	name: text("name").notNull(),
+	type: text("type").notNull(),
+	street: text("street").notNull(),
+	city: text("city").notNull(),
+	state: text("state").notNull(),
+	zip: text("zip").notNull(),
+	rating: real("rating").notNull(),
+	reviewCount: real("reviewCount").notNull(),
 });

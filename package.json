@@ -6,7 +6,7 @@
 	"scripts": {
 		"build": "next build",
 		"db:push": "drizzle-kit push:pg && NODE_ENV=production drizzle-kit push:pg",
-		"db:studio": "drizzle-kit studio",
+		"db:studio": "NODE_ENV=develpment drizzle-kit studio",
 		"dev": "DEBUG=responder:* next dev --turbo",
 		"lint": "next lint",
 		"start": "next start"
@@ -61,7 +61,7 @@
 		"@types/react": "^18.3.2",
 		"@types/react-dom": "^18.3.0",
 		"debug": "^4.3.4",
-		"drizzle-kit": "^0.20.18",
+		"drizzle-kit": "^0.21.4",
 		"lefthook": "^1.6.12",
 		"pg": "^8.11.5",
 		"postcss": "^8.4.38",
