@@ -1,48 +1,53 @@
 import "server-only";
 
 import { auth } from "@clerk/nextjs/server";
-import { revalidatePath } from "next/cache";
-import analyticsServerClient from "./analytics";
+import { eq } from "drizzle-orm";
+
 import { db } from "./db";
 import { ratelimit } from "./ratelimit";
+import type { SelectLocation } from "types";
+import { locations } from "./db/schema";
 
-export async function getUserBusiness(id: string) {
-	const user = auth();
-	if (!user.userId) throw new Error("User is not authenticated");
+// async function addBusinessAccount() {
+// 	const user = auth();
+// 	if (!user.userId) throw new Error("User is not authenticated");
 
-	// if (id !== user.userId) throw new Error("Invalid user id");
+// 	const { success } = await ratelimit.limit(user.userId);
+// 	if (!success) throw new Error("Rate limit exceeded");
 
-	const { success } = await ratelimit.limit(user.userId);
-	if (!success) throw new Error("Rate limit exceeded");
+// 	// await db.insert(users).values({
+// 	// 	name: "User",
+// 	// 	email: "jackwattersdev@me.com",
+// 	// 	company: "Company",
+// 	// });
 
-	const userBusiness = false;
+// 	// analyticsServerClient.capture({
+// 	// 	distinctId: user.userId,
+// 	// 	event: "User Added",
+// 	// 	// properties: {name: "User",} other properties you might want to track
+// 	// });
 
-	return userBusiness;
+// 	revalidatePath("/");
+// 	// redirect("/");
+// }
 
-	// TODO create schemas
-	// TODO query
-	// const userBusiness = await db
-}
+export type GetUserBusinessesSuccessReturn = SelectLocation[];
+export async function getUserBusinesses(): Promise<
+	SelectLocation[] | undefined
+> {
+	const user = auth().protect();
 
-export async function addBusinessAccount() {
-	const user = auth();
-	if (!user.userId) throw new Error("User is not authenticated");
+	// 	const { success } = await ratelimit.limit(user.userId);
+	// 	if (!success) throw new Error("Rate limit exceeded");
 
-	const { success } = await ratelimit.limit(user.userId);
-	if (!success) throw new Error("Rate limit exceeded");
+	try {
+		const businesses = await db
+			.select()
+			.from(locations)
+			.where(eq(locations.accountId, user.userId));
 
-	// await db.insert(users).values({
-	// 	name: "User",
-	// 	email: "jackwattersdev@me.com",
-	// 	company: "Company",
-	// });
-
-	// analyticsServerClient.capture({
-	// 	distinctId: user.userId,
-	// 	event: "User Added",
-	// 	// properties: {name: "User",} other properties you might want to track
-	// });
-
-	revalidatePath("/");
-	// redirect("/");
+		return businesses;
+	} catch (e) {
+		console.error(e);
+	}
 }

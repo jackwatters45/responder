@@ -1,55 +1,16 @@
-import { nanoid } from "nanoid";
-
-import type { SelectLocation } from "types";
+import { getUserBusinesses } from "~/server/queries";
 
 import BusinessesForm from "~/app/_components/businesses/businesses-form";
 import ConnectGoogle from "~/app/_components/connect-google";
 
-// TODO
-async function getUserBusinesses(): Promise<Partial<SelectLocation>[]> {
-	return [
-		{
-			id: nanoid(),
-			name: "Business 1",
-			type: "Google My Business",
-			street: "123 First St",
-			city: "Springfield",
-			state: "IL",
-			zip: "62701",
-			rating: 4.5,
-			reviewCount: 100,
-		},
-		{
-			id: nanoid(),
-			name: "Business 2",
-			type: "Google My Business 2",
-			street: "321 Second St",
-			city: "Springfield",
-			state: "IL",
-			zip: "62701",
-			rating: 4.2,
-			reviewCount: 55,
-		},
-		{
-			id: nanoid(),
-			name: "Business 3",
-			type: "Google My Business 3",
-			street: "231 Third St",
-			city: "Springfield",
-			state: "IL",
-			zip: "62701",
-			rating: 3.8,
-			reviewCount: 62,
-		},
-	];
-}
-
 export default async function Settings() {
 	const businesses = await getUserBusinesses();
 
-	if (businesses.length === 0) return <ConnectGoogle />;
+	console.log(businesses);
+	if (!businesses) return "error";
 
-	// TODO change text
+	if (businesses?.length === 0) return "account has no associated businesses";
+
 	return (
 		<div className="container mx-auto px-4 md:px-6">
 			<div className="mx-auto max-w-3xl pt-12 pb-24">

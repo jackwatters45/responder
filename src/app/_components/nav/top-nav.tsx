@@ -23,7 +23,7 @@ export async function TopNav() {
 				</SignedOut>
 				<SignedIn>
 					<NavigationMenuLink
-						href={username ?? "/dashboard"}
+						href={`/${username}` ?? "/dashboard"}
 						className="flex items-center gap-3"
 					>
 						<div className="flex items-center gap-3">
@@ -59,7 +59,7 @@ export async function TopNav() {
 							</NavigationMenuLink>
 						</div>
 						<ThemeToggle />
-						<div className="leading-[0px]">
+						<div className="leading-[0px] w-[28px]">
 							<UserButton />
 						</div>
 					</div>

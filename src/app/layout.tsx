@@ -1,12 +1,11 @@
 import "~/styles/globals.css";
 
-import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 
-import { TopNav } from "./_components/nav/top-nav";
+import Providers from "./providers";
 import { Toaster } from "./_components/ui/toaster";
-import { ThemeProvider } from "./theme-provider";
+import { TopNav } from "./_components/nav/top-nav";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -19,7 +18,7 @@ export const metadata = {
 	icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default async function RootLayout({
+export default function RootLayout({
 	children,
 	modal,
 }: {
@@ -29,25 +28,18 @@ export default async function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`font-sans ${inter.variable}`}>
-				<ClerkProvider>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="system"
-						enableSystem
-						disableTransitionOnChange
-					>
-						<div className="font-sans flex min-h-screen flex-col items-center">
-							<TopNav />
-							<main className="w-full flex-1 pt-14 flex flex-col">
-								{children}
-								{modal}
-								<div id="modal-route" />
-								<Toaster />
-							</main>
-							<Footer />
-						</div>
-					</ThemeProvider>
-				</ClerkProvider>
+				<Providers>
+					<div className="font-sans flex min-h-screen flex-col items-center">
+						<TopNav />
+						<main className="w-full flex-1 pt-14 flex flex-col">
+							{children}
+							{modal}
+							<div id="modal-route" />
+							<Toaster />
+						</main>
+						<Footer />
+					</div>
+				</Providers>
 			</body>
 		</html>
 	);

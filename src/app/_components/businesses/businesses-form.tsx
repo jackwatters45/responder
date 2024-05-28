@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import type { BusinessPreview } from "types";
 import { cn, getIsLastSingle } from "~/lib/utils";
+import type { GetUserBusinessesSuccessReturn } from "~/server/queries";
 import { editActiveBusinesses } from "./actions";
 
 import {
@@ -16,14 +16,12 @@ import {
 import { Switch } from "~/app/_components/ui/switch";
 import { toast } from "~/app/_components/ui/use-toast";
 
-interface BusinessesFormProps {
-	businesses: BusinessPreview[];
-}
-
-export default function BusinessesForm({ businesses }: BusinessesFormProps) {
+export default function BusinessesForm({
+	businesses,
+}: { businesses: GetUserBusinessesSuccessReturn }) {
 	return (
 		<div className="grid grid-cols-2 gap-4">
-			{businesses.map((business, i) => (
+			{businesses?.map((business, i) => (
 				<BusinessPreviewCard
 					key={business.id}
 					{...business}
@@ -35,7 +33,7 @@ export default function BusinessesForm({ businesses }: BusinessesFormProps) {
 }
 
 function BusinessPreviewCard(
-	props: BusinessPreview & {
+	props: GetUserBusinessesSuccessReturn[number] & {
 		initialSelected?: boolean;
 		isLastSingle: boolean | null;
 	},
@@ -55,7 +53,7 @@ function BusinessPreviewCard(
 			<CardHeader className="space-y-4">
 				<CardTitle>{props.name}</CardTitle>
 				<CardDescription className="space-y-4 text-muted-foreground">
-					{props.type} in {props.address.city}, {props.address.state}
+					{props.type} in {props.city}, {props.state}
 				</CardDescription>
 			</CardHeader>
 			<CardContent className=" flex flex-col sm:flex-row sm:items-center justify-between">

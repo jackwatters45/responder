@@ -1,5 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
+import { nanoid } from "nanoid";
 import { twMerge } from "tailwind-merge";
+
+import type { Filter } from "types";
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -17,3 +20,21 @@ export function titleCase(str: string): string {
 		})
 		.join(" ");
 }
+
+export const getDefaultFilter = (): Filter => ({
+	id: nanoid(),
+	name: "",
+	filter: {
+		comparison: "",
+		rating: "",
+	},
+	prompt: "",
+	sendEmail: false,
+	responseTime: {
+		range: {
+			start: "30",
+			end: "60",
+		},
+		timeUnit: "minutes",
+	},
+});

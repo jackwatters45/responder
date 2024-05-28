@@ -5,7 +5,6 @@ import { useState } from "react";
 import { z } from "zod";
 
 import type { Filter } from "types";
-import { getDefaultFilter } from "./actions";
 
 import { Button } from "~/app/_components/ui/button";
 import {
@@ -28,6 +27,7 @@ import {
 import { SubmitButton } from "~/app/_components/ui/submit-button";
 import { Switch } from "~/app/_components/ui/switch";
 import { Textarea } from "~/app/_components/ui/textarea";
+import { getDefaultFilter } from "~/lib/utils";
 
 export const filter = z.object({
 	id: z.string(),
@@ -52,7 +52,9 @@ export const filter = z.object({
 export default function Filters({ filters: initial }: { filters: Filter[] }) {
 	const [parent] = useAutoAnimate();
 
-	const [filters, setFilters] = useState<Filter[]>(initial);
+	const [filters, setFilters] = useState<Filter[]>(
+		initial.length ? initial : [getDefaultFilter()],
+	);
 	const addFilter = () => setFilters((prev) => [...prev, getDefaultFilter()]);
 	const removeFilter = (id: string) => {
 		if (filters.length < 2) return;

@@ -2,7 +2,6 @@ import { auth } from "@clerk/nextjs/server";
 
 import PlanForm from "./form";
 
-// TODO onboarding page
 export default async function Billing() {
 	const plan = auth().protect().sessionClaims?.publicMetaData?.plan;
 

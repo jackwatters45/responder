@@ -3,7 +3,6 @@
 import { auth } from "@clerk/nextjs/server";
 import debug from "debug";
 import { eq } from "drizzle-orm";
-import { z } from "zod";
 import { db } from "~/server/db";
 import { locations } from "~/server/db/schema";
 
@@ -25,11 +24,6 @@ export async function editActiveBusinesses(
 			})
 			.where(eq(locations.id, businessId))
 			.returning();
-
-		if (!business.length) {
-			log("error", "failed to update business");
-			return false;
-		}
 
 		return business;
 	} catch (e) {

@@ -7,7 +7,7 @@ import {
 import { Button } from "~/app/_components/ui/button";
 import { Card, CardContent } from "~/app/_components/ui/card";
 
-export default async function Home() {
+export default function Home() {
 	return (
 		<main className="flex flex-col">
 			<section className="bg-secondary py-20 md:py-32">

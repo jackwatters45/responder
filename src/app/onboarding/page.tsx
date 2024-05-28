@@ -1,13 +1,10 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-import { eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
-import type { SelectLocation } from "types";
-import { db } from "~/server/db";
-import { locations } from "~/server/db/schema";
-import ConnectGoogle from "../_components/connect-google";
-import DashboardForm from "./form";
+import { Suspense } from "react";
+import { getUserBusinesses } from "~/server/queries";
+import BusinessesForm from "../_components/businesses/businesses-form";
 
 const fakeBusinesses = [
 	{
@@ -45,23 +42,6 @@ const fakeBusinesses = [
 	},
 ];
 
-async function getUserBusinesses(
-	accountId: string,
-): Promise<SelectLocation[] | false> {
-	try {
-		const businesses = await db
-			.select()
-			.from(locations)
-			.where(eq(locations.accountId, accountId));
-
-		return businesses;
-	} catch (e) {
-		console.error(e);
-		return false;
-	}
-}
-
-// TODO dumb types - business form -> what needs to use form vs schema types
 // TODO test return empty array
 // TODO test return false
 // TODO make some test data
@@ -70,18 +50,34 @@ export default async function Dashboard({
 }: {
 	params: { id: string };
 }) {
-	const session = auth();
+	const session = auth().protect();
+
 	const isOnboarded = session?.sessionClaims?.publicMetaData?.isOnboarded;
 	if (isOnboarded) return redirect(`/${id}`);
 
-	const accountId = session?.userId;
-	if (!accountId) return redirect("/login");
-
-	const businesses = await getUserBusinesses(accountId);
+	const businesses = await getUserBusinesses();
 
 	if (!businesses) return "handle error";
 
-	if (businesses.length === 0) return <ConnectGoogle />;
+	// if (businesses.length === 0) return <ConnectGoogle />;
 
-	return <DashboardForm businesses={businesses} accountId={accountId} />;
+	return (
+		<div className="container mx-auto px-4 md:px-6">
+			<div className="mx-auto max-w-3xl pt-12 pb-24">
+				<div className="space-y-8">
+					<div>
+						<h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+							Welcome to Responder
+						</h1>
+						<p className="pt-4 text-muted-foreground">
+							Let's get you set up to start managing your reviews.
+						</p>
+					</div>
+					<Suspense fallback={<div>Loading...</div>}>
+						<BusinessesForm businesses={businesses} />
+					</Suspense>
+				</div>
+			</div>
+		</div>
+	);
 }

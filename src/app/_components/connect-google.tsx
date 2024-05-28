@@ -10,18 +10,18 @@ import {
 
 export default function ConnectGoogle() {
 	return (
-		<Card className="space-y-4 text-base">
+		<Card className="space-y-4">
 			<CardHeader className="space-y-4">
 				<CardTitle>Connect Google My Business</CardTitle>
-				<CardDescription className="space-y-4 text-base">
-					<div className="text-muted-foreground">
+				<div className="space-y-4 text-base">
+					<CardDescription className="text-muted-foreground">
 						Link your Google My Business account to start managing your reviews.
-					</div>
+					</CardDescription>
 					<div className="text-muted-foreground">
 						You can manage one business on the free plan. Upgrade to manage multiple
 						businesses and unlock premium features.
 					</div>
-				</CardDescription>
+				</div>
 			</CardHeader>
 			<CardContent>
 				<Button size="lg" className="w-full">
