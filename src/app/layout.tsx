@@ -4,8 +4,8 @@ import { Inter } from "next/font/google";
 import Link from "next/link";
 
 import { TopNav } from "./_components/nav/top-nav";
+import Providers from "./_components/providers/providers";
 import { Toaster } from "./_components/ui/toaster";
-import Providers from "./providers";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -26,7 +26,7 @@ export default function RootLayout({
 	modal: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<body className={`font-sans ${inter.variable}`}>
 				<Providers>
 					<div className="font-sans flex min-h-screen flex-col items-center">
