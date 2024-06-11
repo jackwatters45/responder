@@ -3,9 +3,9 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 
-import Providers from "./providers";
-import { Toaster } from "./_components/ui/toaster";
 import { TopNav } from "./_components/nav/top-nav";
+import { Toaster } from "./_components/ui/toaster";
+import Providers from "./providers";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -15,7 +15,7 @@ const inter = Inter({
 export const metadata = {
 	title: "Responder",
 	description: "Optimize Google Business replies using OpenAI (Chat-GPT)",
-	icons: [{ rel: "icon", url: "/favicon.ico" }],
+	// icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 export default function RootLayout({

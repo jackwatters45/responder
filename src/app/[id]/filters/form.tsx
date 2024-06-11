@@ -4,7 +4,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useState } from "react";
 import { z } from "zod";
 
-import type { Filter } from "types";
+import type { FiltersReturn } from "types";
 
 import { Button } from "~/app/_components/ui/button";
 import {
@@ -31,7 +31,7 @@ import { getDefaultFilter } from "~/lib/utils";
 
 export const filter = z.object({
 	id: z.string(),
-	name: z.string({ invalid_type_error: "Invalid Filter" }),
+	name: z.string({ invalid_type_error: "Invalid Filter" }).trim(),
 	filter: z.object({
 		comparison: z.string(),
 		rating: z.string(),
@@ -49,10 +49,12 @@ export const filter = z.object({
 
 // TODO form submit
 // TODO save state in local state or context
-export default function Filters({ filters: initial }: { filters: Filter[] }) {
+export default function Filters({
+	filters: initial,
+}: { filters: FiltersReturn[] }) {
 	const [parent] = useAutoAnimate();
 
-	const [filters, setFilters] = useState<Filter[]>(
+	const [filters, setFilters] = useState<FiltersReturn[]>(
 		initial.length ? initial : [getDefaultFilter()],
 	);
 	const addFilter = () => setFilters((prev) => [...prev, getDefaultFilter()]);

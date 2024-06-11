@@ -29,7 +29,6 @@ export default function Home() {
 							<img
 								alt="Hero"
 								className="rounded-xl object-cover -rotate-6"
-								// height={400}
 								src="/responder-full-scene.webp"
 							/>
 						</div>
@@ -157,7 +156,6 @@ export default function Home() {
 									</blockquote>
 									<div className="mt-4 flex items-center space-x-4">
 										<Avatar>
-											<AvatarImage src="/placeholder-avatar.svg" />
 											<AvatarFallback>JD</AvatarFallback>
 										</Avatar>
 										<div>
@@ -176,7 +174,6 @@ export default function Home() {
 									</blockquote>
 									<div className="mt-4 flex items-center space-x-4">
 										<Avatar>
-											<AvatarImage src="/placeholder-avatar.svg" />
 											<AvatarFallback>JA</AvatarFallback>
 										</Avatar>
 										<div>
@@ -197,7 +194,6 @@ export default function Home() {
 									</blockquote>
 									<div className="mt-4 flex items-center space-x-4">
 										<Avatar>
-											<AvatarImage src="/placeholder-avatar.svg" />
 											<AvatarFallback>SM</AvatarFallback>
 										</Avatar>
 										<div>

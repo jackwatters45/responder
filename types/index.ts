@@ -1,14 +1,24 @@
 import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
-import type { z } from "zod";
-import type { filter } from "~/app/[id]/filters/form";
-import type { accounts, locations } from "~/server/db/schema";
+import type {
+	accountsTable,
+	filtersTable,
+	locationsTable,
+	planEnum,
+	responsesTable,
+	statusEnum,
+} from "~/server/db/schema";
 
-export type SelectAccount = InferSelectModel<typeof accounts>;
-export type InsertAccount = InferInsertModel<typeof accounts>;
+export type AccountReturn = InferSelectModel<typeof accountsTable>;
+export type AccountParams = InferInsertModel<typeof accountsTable>;
 
-export type SelectLocation = InferSelectModel<typeof locations>;
-export type InsertLocation = InferInsertModel<typeof locations>;
+export type LocationReturn = InferSelectModel<typeof locationsTable>;
+export type LocationParams = InferInsertModel<typeof locationsTable>;
 
-export type Plan = "free" | "premium";
+export type ResponseReturn = InferSelectModel<typeof responsesTable>;
+export type ResponseParams = InferInsertModel<typeof responsesTable>;
 
-export type Filter = z.infer<typeof filter>;
+export type FiltersReturn = InferSelectModel<typeof filtersTable>;
+export type FiltersParams = InferInsertModel<typeof filtersTable>;
+
+export type PlanEnum = (typeof planEnum.enumValues)[number];
+export type StatusEnum = (typeof statusEnum.enumValues)[number];

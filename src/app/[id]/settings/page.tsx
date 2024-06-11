@@ -1,12 +1,14 @@
-import { getUserBusinesses } from "~/server/queries";
-
 import BusinessesForm from "~/app/_components/businesses/businesses-form";
 import ConnectGoogle from "~/app/_components/connect-google";
+import { getUserBusinesses } from "~/server/queries/businesses";
+
+import { google } from "googleapis";
 
 export default async function Settings() {
 	const businesses = await getUserBusinesses();
 
-	console.log(businesses);
+	const forms = google.forms("v1");
+
 	if (!businesses) return "error";
 
 	if (businesses?.length === 0) return "account has no associated businesses";

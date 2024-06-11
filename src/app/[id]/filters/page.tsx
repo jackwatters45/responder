@@ -1,6 +1,5 @@
 import { nanoid } from "nanoid";
 
-import type { Filter } from "types";
 import { getFilters, saveFilters } from "./actions";
 import Filters from "./form";
 

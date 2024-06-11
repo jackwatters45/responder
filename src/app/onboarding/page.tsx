@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { nanoid } from "nanoid";
 import { Suspense } from "react";
-import { getUserBusinesses } from "~/server/queries";
+import { getUserBusinesses } from "~/server/queries/businesses";
 import BusinessesForm from "../_components/businesses/businesses-form";
 
 const fakeBusinesses = [

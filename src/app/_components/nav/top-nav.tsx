@@ -11,6 +11,7 @@ import { ThemeToggle } from "../ui/theme-toggle";
 
 export async function TopNav() {
 	const username = auth()?.sessionClaims?.username;
+	// const username = 'jeff'
 
 	return (
 		<NavigationMenu className="bg-background max-w-none fixed z-50 flex h-14 w-full items-center justify-between lg:border-b px-8">

@@ -1,20 +1,22 @@
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
-import { Button } from "~/app/_components/ui/button";
-import { getUserBusinesses } from "~/server/queries";
-import ComingSoon from "../_components/errors/coming-soon";
+import { Button, ButtonLink } from "~/app/_components/ui/button";
+import {
+	addBusinessAccount,
+	getIsBusinesses,
+} from "~/server/queries/businesses";
+import { getIsFilters } from "./filters/actions";
 
-export default async function Dashboard({
-	params: { id },
-}: {
-	params: { id: string };
-}) {
-	const businesses = await getUserBusinesses();
+// TODO a fake create business account function
+export default async function Dashboard() {
+	const isBusinesses = await getIsBusinesses();
+
+	const isFilters = await getIsFilters();
 
 	return (
 		<>
-			{!businesses?.length && <ConnectBusiness />}
-			<ComingSoon />
+			{!isBusinesses && <ConnectBusiness />}
+			{isBusinesses && !isFilters && <AddFilter />}
 		</>
 	);
 }
@@ -26,16 +28,24 @@ function ConnectBusiness() {
 				<ExclamationTriangleIcon />
 				<span>You haven't connected a Google Business yet.</span>
 			</div>
-			{/* TODO uncomment out once quota increased */}
 			{/* <ButtonLink href="/api/auth/google">Get Started</ButtonLink> */}
-			<form
-				action={async () => {
-					"use server";
-					// await addBusinessAccount();
-				}}
-			>
-				<Button type="submit">connect</Button>
+			<form action={addBusinessAccount}>
+				<Button type="submit">Connect</Button>
 			</form>
+		</div>
+	);
+}
+
+function AddFilter() {
+	return (
+		<div className="border flex justify-between items-center px-4 py-3 rounded-md bg-secondary text-secondary-foreground">
+			<div className="flex items-center gap-2">
+				<ExclamationTriangleIcon />
+				<span>You haven't added any filters.</span>
+			</div>
+
+			{/* <ButtonLink href="/api/auth/google">Get Started</ButtonLink> */}
+			<ButtonLink href="/filters">Add Filters</ButtonLink>
 		</div>
 	);
 }

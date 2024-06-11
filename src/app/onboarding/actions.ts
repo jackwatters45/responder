@@ -5,7 +5,7 @@ import debug from "debug";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { db } from "~/server/db";
-import { accounts, locations } from "~/server/db/schema";
+import { accountsTable, locationsTable } from "~/server/db/schema";
 
 const log = debug("responder:onboarding:actions");
 
@@ -47,7 +47,7 @@ export async function createUserConfig(prevState: unknown, formData: FormData) {
 		//
 		//
 		// TODO delete
-		await db.insert(accounts).values({
+		await db.insert(accountsTable).values({
 			id: validatedFields.data.accountId,
 			userId: user.userId,
 		});
@@ -55,7 +55,7 @@ export async function createUserConfig(prevState: unknown, formData: FormData) {
 		//
 		//
 
-		await db.insert(locations).values(
+		await db.insert(locationsTable).values(
 			validatedFields.data.businesses.map((id) => ({
 				id,
 				accountId: validatedFields.data.accountId,

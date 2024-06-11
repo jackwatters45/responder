@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import debug from "debug";
 import { eq } from "drizzle-orm";
 import { db } from "~/server/db";
-import { locations } from "~/server/db/schema";
+import { locationsTable } from "~/server/db/schema";
 
 const log = debug("responder:settings:businesses:actions");
 
@@ -18,11 +18,11 @@ export async function editActiveBusinesses(
 		const isSelected = formData.get(businessId) === "on";
 
 		const business = await db
-			.update(locations)
+			.update(locationsTable)
 			.set({
 				active: isSelected,
 			})
-			.where(eq(locations.id, businessId))
+			.where(eq(locationsTable.id, businessId))
 			.returning();
 
 		return business;

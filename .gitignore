@@ -47,3 +47,6 @@ yarn-error.log*
 
 # Million Lint
 .million
+
+# Notes
+.notes.md
