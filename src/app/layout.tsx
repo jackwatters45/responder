@@ -15,7 +15,7 @@ const inter = Inter({
 export const metadata = {
 	title: "Responder",
 	description: "Optimize Google Business replies using OpenAI (Chat-GPT)",
-	// icons: [{ rel: "icon", url: "/favicon.ico" }],
+	icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 export default function RootLayout({

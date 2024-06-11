@@ -1,9 +1,5 @@
 import type { JSX, SVGProps } from "react";
-import {
-	Avatar,
-	AvatarFallback,
-	AvatarImage,
-} from "~/app/_components/ui/avatar";
+import { Avatar, AvatarFallback } from "~/app/_components/ui/avatar";
 import { Button } from "~/app/_components/ui/button";
 import { Card, CardContent } from "~/app/_components/ui/card";
 
@@ -12,18 +8,20 @@ export default function Home() {
 		<main className="flex flex-col">
 			<section className="bg-secondary py-20 md:py-32">
 				<div className="container px-4 md:px-6">
-					<div className="grid md:grid-cols-2 items-center">
-						<div className="space-y-4">
-							<h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-								Automate Your Google My Business Replies
-							</h1>
-							<p className="text-muted-foreground text-lg md:text-xl">
-								Use OpenAI to generate personalized responses and save time managing
-								your Google My Business listings.
-							</p>
-							<Button size="lg" variant="default">
-								Get Started
-							</Button>
+					<div className="grid md:grid-cols-2 items-center justify-center">
+						<div className="aspect-w-1 aspect-h-1  ">
+							<div className="space-y-6 h-fit my-auto ml-auto max-w-screen-sm">
+								<h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+									Automate Your Google My Business Replies
+								</h1>
+								<p className="text-muted-foreground text-lg md:text-xl">
+									Use OpenAI to generate personalized responses and save time managing
+									your Google My Business listings.
+								</p>
+								<Button size="lg" variant="default" className="w-fit">
+									Get Started
+								</Button>
+							</div>
 						</div>
 						<div className="hidden md:block">
 							<img
